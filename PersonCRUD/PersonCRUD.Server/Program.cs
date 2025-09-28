@@ -1,4 +1,5 @@
 using PersonCRUD.Application.Commands.CreatePersonCommand;
+using PersonCRUD.Server.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.MapControllers();
 

@@ -16,9 +16,12 @@ namespace PersonCRUD.Server.Controllers
         }
 
         [HttpPost(Name = "CreatePerson")]
-        public async Task<ActionResult> Post([FromServices] IMediator mediator, [FromBody] CreatePersonCommand command)
+        public async Task<ActionResult> Post(
+            [FromServices] IMediator mediator,
+            [FromBody] CreatePersonCommand command,
+            CancellationToken cancellationToken = default)
         {
-            PersonDTO dto = await mediator.Send(command);
+            PersonDTO dto = await mediator.Send(command, cancellationToken);
             return Ok(dto);
         }
 
