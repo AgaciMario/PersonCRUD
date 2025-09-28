@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using PersonCRUD.Application.Commands.CreatePersonCommand;
+using PersonCRUD.Application.DTOs;
 
 namespace PersonCRUD.Server.Controllers
 {
@@ -8,14 +10,15 @@ namespace PersonCRUD.Server.Controllers
     {
         [HttpGet(Name = "GetPerson")]
         public IEnumerable<object> Get()
-        {
+        {   
             throw new NotImplementedException();
         }
 
         [HttpPost(Name = "CreatePerson")]
-        public IEnumerable<object> Post()
+        public IActionResult Post([FromBody] CreatePersonCommand command)
         {
-            throw new NotImplementedException();
+            PersonDTO dto = CreatePersonHandler.Handle(command);
+            return Ok(dto);
         }
 
         [HttpPut(Name = "UpdatePerson")]

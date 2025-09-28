@@ -1,6 +1,6 @@
-﻿namespace PersonCRUD.Domain.Entities
+﻿namespace PersonCRUD.Application.DTOs
 {
-    public class Person
+    public class PersonDTO
     {
         public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
