@@ -1,6 +1,9 @@
-﻿namespace PersonCRUD.Application.Commands.CreatePersonCommand
+﻿using MediatR;
+using PersonCRUD.Application.DTOs;
+
+namespace PersonCRUD.Application.Commands.CreatePersonCommand
 {
-    public class CreatePersonCommand
+    public class CreatePersonCommand : IRequest<PersonDTO>
     {
         public required string Name { get; set; } = string.Empty;
         public string Sex { get; set; } = string.Empty;

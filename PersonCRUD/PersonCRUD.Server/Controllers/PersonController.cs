@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
 using PersonCRUD.Application.DTOs;
@@ -15,9 +16,9 @@ namespace PersonCRUD.Server.Controllers
         }
 
         [HttpPost(Name = "CreatePerson")]
-        public IActionResult Post([FromBody] CreatePersonCommand command)
+        public async Task<ActionResult> Post([FromServices] IMediator mediator, [FromBody] CreatePersonCommand command)
         {
-            PersonDTO dto = CreatePersonHandler.Handle(command);
+            PersonDTO dto = await mediator.Send(command);
             return Ok(dto);
         }
 
