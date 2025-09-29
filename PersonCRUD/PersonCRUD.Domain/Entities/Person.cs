@@ -2,6 +2,7 @@
 {
     public class Person
     {
+        //TODO: Isolar os campos id, updatedate e craetedate em uma classe base
         protected Person() { }
 
         public Person(string name, string sex, string email, DateTime birthDate, string placeOfBirth, string nationality, string cpf)
@@ -30,8 +31,21 @@
 
         private void SetCPF(string cpf)
         {
+            // TODO: Não mais necessário pois a versão atual da api não aceita CPFs com formatação
             cpf = cpf.Replace(".", "").Replace("-", "");
             CPF = cpf;
+        }
+
+        public void Update(string name, string sex, string email, DateTime birthDate, string placeOfBirth, string nationality, string cpf)
+        {
+            Name = name;
+            Sex = sex;
+            Email = email;
+            BirthDate = birthDate;
+            PlaceOfBirth = placeOfBirth;
+            Nationality = nationality;
+            SetCPF(cpf);
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

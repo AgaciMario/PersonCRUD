@@ -7,8 +7,8 @@ Criar uma aplicação para o cadastro de pessoas, composta por um back-end em
 Desenvolver uma API REST em C# com .NET 6 ou superior que permita
 as seguintes operações:
 
-- [ ] Cadastro: Inserir novos registros de pessoas.
-- [ ] Alteração: Atualizar informações de registros existentes.
+- [x] Cadastro: Inserir novos registros de pessoas.
+- [x] Alteração: Atualizar informações de registros existentes.
 - [ ] Remoção: Excluir registros de pessoas.
 - [ ] Consulta: Buscar registros de pessoas.
 

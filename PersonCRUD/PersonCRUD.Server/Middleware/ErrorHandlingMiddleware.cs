@@ -1,4 +1,5 @@
-﻿using PersonCRUD.Server.Records;
+﻿using PersonCRUD.Domain.Exceptions;
+using PersonCRUD.Server.Records;
 using System.Net;
 using System.Text.Json;
 
@@ -12,9 +13,15 @@ namespace PersonCRUD.Server.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
+            //TODO: Padronizar casos de exception por falha na deserialização.
+
             try
             {
                 await _next(context);
+            }
+            catch (NotFoundException ex)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.NotFound, ex.Message);
             }
             catch (ArgumentException ex)
             {

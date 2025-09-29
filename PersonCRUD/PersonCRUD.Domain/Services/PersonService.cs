@@ -1,5 +1,6 @@
 ﻿using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.Domain.Entities;
+using PersonCRUD.Domain.Exceptions;
 using PersonCRUD.Domain.Records;
 
 namespace PersonCRUD.Domain.Services
@@ -13,11 +14,14 @@ namespace PersonCRUD.Domain.Services
             _personRepository = personRepository;
         }
 
-        public async Task<Person> CreatePerson(PersonRecord person, CancellationToken ct = default)
+        public async Task<Person> CreatePerson(CreatePersonRecord person, CancellationToken ct = default)
         {
             try
             {
-                await ValidateIfPersonIsRegistered(person.cpf, ct);
+                Person? existingPerson = await _personRepository.GetPersonByCPF(person.cpf, ct);
+
+                if (existingPerson != null)
+                    throw new ArgumentException("A Person with this CPF is already registered.");
 
                 return new Person(
                     person.name,
@@ -35,14 +39,25 @@ namespace PersonCRUD.Domain.Services
             }
         }
 
-        public async Task ValidateIfPersonIsRegistered(string cpf, CancellationToken ct = default)
+        public async Task<Person> UpdatePerson(UpdatePersonRecord person, CancellationToken ct = default)
         {
             try
             {
-                Person? existingPerson = await _personRepository.GetPersonByCPF(cpf, ct);
+                // TODO: Adicionar exception propria pois a null ArgumentNullException adiciona conteudo a mensagem de erro.
+                Person? existingPerson = await _personRepository.GetPersonById(person.id, ct)
+                    ?? throw new NotFoundException("A Person with the given id was not found");
 
-                if (existingPerson != null)
-                    throw new ArgumentException("A Person with this CPF is already registered.");
+                existingPerson.Update(
+                    person.name,
+                    person.sex,
+                    person.email,
+                    person.birthDate,
+                    person.placeOfBirth,
+                    person.nationality,
+                    person.cpf
+                );
+
+                return existingPerson;
             }
             catch (Exception)
             {

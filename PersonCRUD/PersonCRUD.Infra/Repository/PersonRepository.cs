@@ -25,10 +25,10 @@ namespace PersonCRUD.Infra.Repository
             .AsNoTracking()
             .SingleOrDefaultAsync(ct);
 
-        public Task<Person> GetPersonById(long personId, CancellationToken ct)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Person?> GetPersonById(long personId, CancellationToken ct) => await PersonDbContext.Person
+            .Where(person => person.Id == personId)
+            .AsNoTracking()
+            .SingleOrDefaultAsync(ct);
 
         public async Task<Person> RegisterPerson(Person person, CancellationToken ct)
         {
@@ -37,9 +37,11 @@ namespace PersonCRUD.Infra.Repository
             return person;
         }
 
-        public Task<Person> UpdatePerson(Person person, CancellationToken ct)
+        public async Task<Person> UpdatePerson(Person person, CancellationToken ct)
         {
-            throw new NotImplementedException();
+            PersonDbContext.Person.Update(person);
+            await PersonDbContext.SaveChangesAsync(ct);
+            return person;
         }
     }
 }
