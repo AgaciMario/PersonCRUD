@@ -27,7 +27,7 @@ namespace PersonCRUD.Application.Commands.CreatePersonCommand
             }
             else
             {
-                DateTime upperLimit = DateTime.Now.AddYears(120);
+                DateTime upperLimit = DateTime.Now;
                 DateTime lowerLimit = DateTime.Now.AddYears(-120);
 
                 if(command.BirthDate < lowerLimit || command.BirthDate > upperLimit)
