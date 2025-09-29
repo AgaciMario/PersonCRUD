@@ -18,11 +18,11 @@ namespace PersonCRUD.Application.Commands.CreatePersonCommand
 
         public async Task<PersonDTO> Handle(CreatePersonCommand request, CancellationToken ct = default)
         {
+            // TODO: mudar mapping para usar AutoMapper ou isolar o mapeamento em uma classe propria;
             try
             {
                 CreatePersonValidator.Validate(request);
 
-                // TODO: Encontrar um nome melhor para o método CreatePerson do PersonService/PersonRepository
                 Person newPerson = personService.CreatePerson(new( 
                     name: request.Name,
                     sex: request.Sex,
@@ -33,7 +33,7 @@ namespace PersonCRUD.Application.Commands.CreatePersonCommand
                     cpf: request.CPF
                 ), ct);
 
-                newPerson = await personRepository.CreatePerson(newPerson, ct);
+                newPerson = await personRepository.RegisterPerson(newPerson, ct);
 
                 var personDTO = new PersonDTO
                 {

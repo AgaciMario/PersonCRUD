@@ -4,7 +4,7 @@ namespace PersonCRUD.Domain.Abstractions
 {
     public interface IPersonRepository
     {
-        Task<Person> CreatePerson(Person person, CancellationToken ct);
+        Task<Person> RegisterPerson(Person person, CancellationToken ct);
         Task<Person> UpdatePerson(Person person, CancellationToken ct);
         Task<Person> DeletePerson(long personId, CancellationToken ct);
         Task<Person> GetPersonById(long personId, CancellationToken ct);
