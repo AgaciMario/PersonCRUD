@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using PersonCRUD.Server.Records;
+using System.Net;
 using System.Text.Json;
 
 namespace PersonCRUD.Server.Middleware
@@ -31,11 +32,11 @@ namespace PersonCRUD.Server.Middleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
 
-            var result = JsonSerializer.Serialize(new
-            {
-                error = message,
-                status = statusCode
-            });
+            var result = JsonSerializer.Serialize(new ErrorResponse
+            (
+                Error: message,
+                StatusCode: (int)statusCode
+            ));
 
             return context.Response.WriteAsync(result);
         }
