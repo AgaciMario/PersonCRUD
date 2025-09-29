@@ -13,11 +13,11 @@ namespace PersonCRUD.Domain.Services
             _personRepository = personRepository;
         }
 
-        public Person CreatePerson(PersonRecord person, CancellationToken ct = default)
+        public async Task<Person> CreatePerson(PersonRecord person, CancellationToken ct = default)
         {
             try
             {
-                ValidateIfPersonIsRegistered(person.cpf, ct);
+                await ValidateIfPersonIsRegistered(person.cpf, ct);
 
                 return new Person(
                     person.name,
@@ -35,12 +35,19 @@ namespace PersonCRUD.Domain.Services
             }
         }
 
-        public async void ValidateIfPersonIsRegistered(string cpf, CancellationToken ct = default)
+        public async Task ValidateIfPersonIsRegistered(string cpf, CancellationToken ct = default)
         {
-            Person? existingPerson = await _personRepository.GetPersonByCPF(cpf, ct);
+            try
+            {
+                Person? existingPerson = await _personRepository.GetPersonByCPF(cpf, ct);
 
-            if(existingPerson != null)
-                throw new ArgumentException("Person with this CPF is already registered.");
+                if (existingPerson != null)
+                    throw new ArgumentException("A Person with this CPF is already registered.");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

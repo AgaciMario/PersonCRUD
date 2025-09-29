@@ -8,6 +8,6 @@ namespace PersonCRUD.Domain.Abstractions
         Task<Person> UpdatePerson(Person person, CancellationToken ct);
         Task<Person> DeletePerson(long personId, CancellationToken ct);
         Task<Person> GetPersonById(long personId, CancellationToken ct);
-        Task<Person?> GetPersonByCPF(string CPF, CancellationToken ct);
+        Task<Person?> GetPersonByCPF(string cpf, CancellationToken ct);
     }
 }

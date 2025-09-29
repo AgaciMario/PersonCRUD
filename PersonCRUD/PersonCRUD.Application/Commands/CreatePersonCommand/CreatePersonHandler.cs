@@ -23,7 +23,7 @@ namespace PersonCRUD.Application.Commands.CreatePersonCommand
             {
                 CreatePersonValidator.Validate(request);
 
-                Person newPerson = personService.CreatePerson(new( 
+                Person newPerson = await personService.CreatePerson(new( 
                     name: request.Name,
                     sex: request.Sex,
                     email: request.Email,

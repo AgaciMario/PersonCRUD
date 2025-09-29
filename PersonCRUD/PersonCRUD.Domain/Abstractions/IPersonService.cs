@@ -5,7 +5,7 @@ namespace PersonCRUD.Domain.Abstractions
 {
     public interface IPersonService
     {
-        Person CreatePerson(PersonRecord personRecord, CancellationToken ct);
-        void ValidateIfPersonIsRegistered(string cpf, CancellationToken ct);
+        Task<Person> CreatePerson(PersonRecord personRecord, CancellationToken ct);
+        Task ValidateIfPersonIsRegistered(string cpf, CancellationToken ct);
     }
 }
