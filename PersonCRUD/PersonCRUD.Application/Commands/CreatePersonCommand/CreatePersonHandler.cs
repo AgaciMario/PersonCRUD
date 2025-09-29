@@ -1,31 +1,55 @@
 ﻿using MediatR;
 using PersonCRUD.Application.DTOs;
+using PersonCRUD.Domain.Abstractions;
+using PersonCRUD.Domain.Entities;
 
 namespace PersonCRUD.Application.Commands.CreatePersonCommand
 {
     public class CreatePersonHandler : IRequestHandler<CreatePersonCommand, PersonDTO>
     {
-        public Task<PersonDTO> Handle(CreatePersonCommand request, CancellationToken cancellationToken = default)
+        private readonly IPersonService personService;
+        private readonly IPersonRepository personRepository;
+
+        public CreatePersonHandler(IPersonService personService, IPersonRepository personRepository)
+        {
+            this.personService = personService;
+            this.personRepository = personRepository;
+        }
+
+        public async Task<PersonDTO> Handle(CreatePersonCommand request, CancellationToken ct = default)
         {
             try
             {
-                // TODOS: 
                 CreatePersonValidator.Validate(request);
-                // 2. Map the command to a domain model (if you have one)
-                // 3. Save the domain model to the database (you would typically use a repository or a DbContext here)
-                // 4. Map the saved domain model to a DTO and return it
 
-                // Here you would typically add logic to save the person to a database
-                // For this example, we'll just return a new PersonDTO with the provided data
-                var newPerson = new PersonDTO
+                // TODO: Encontrar um nome melhor para o método CreatePerson do PersonService/PersonRepository
+                Person newPerson = personService.CreatePerson(new( 
+                    name: request.Name,
+                    sex: request.Sex,
+                    email: request.Email,
+                    birthDate: request.BirthDate,
+                    placeOfBirth: request.PlaceOfBirth,
+                    nationality: request.Nationality,
+                    cpf: request.CPF
+                ), ct);
+
+                newPerson = await personRepository.CreatePerson(newPerson, ct);
+
+                var personDTO = new PersonDTO
                 {
-                    Id = 1, // Simulate database-generated ID
-                    Name = request.Name,
-                    BirthDate = request.BirthDate,
-                    CPF = request.CPF
+                    Id = newPerson.Id.Value,
+                    Name = newPerson.Name,
+                    Sex = newPerson.Sex,
+                    Email = newPerson.Email,
+                    BirthDate = newPerson.BirthDate,
+                    PlaceOfBirth = newPerson.PlaceOfBirth,
+                    Nationality = newPerson.Nationality,
+                    CPF = newPerson.CPF,
+                    CreatedAt = newPerson.CreatedAt,
+                    UpdatedAt = newPerson.UpdatedAt,
                 };
 
-                return Task.FromResult(newPerson);
+                return personDTO;
             }
             catch (Exception)
             {

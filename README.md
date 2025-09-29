@@ -12,14 +12,14 @@ as seguintes operações:
 - [ ] Remoção: Excluir registros de pessoas.
 - [ ] Consulta: Buscar registros de pessoas.
 
-- [ ] Informações a serem cadastradas:
-- [ ] Nome: obrigatório
-- [ ] Sexo: opcional
-- [ ] E-mail: opcional, mas deve ser validado se preenchido
-- [ ] Data de Nascimento: obrigatória, deve ser validada
-- [ ] Naturalidade: opcional
-- [ ] Nacionalidade: opcional
-- [ ] CPF: obrigatório, deve ser validado (formato correto e unicidade)
+- [x] Informações a serem cadastradas:
+- [x] Nome: obrigatório
+- [x] Sexo: opcional
+- [x] E-mail: opcional, mas deve ser validado se preenchido
+- [x] Data de Nascimento: obrigatória, deve ser validada
+- [X] Naturalidade: opcional
+- [X] Nacionalidade: opcional
+- [x] CPF: obrigatório, deve ser validado (formato correto e unicidade)
 Observação: As datas de cadastro e atualização dos dados devem ser
 armazenadas.
 
