@@ -20,10 +20,10 @@ namespace PersonCRUD.Infra.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<Person?> GetPersonByCPF(string CPF, CancellationToken ct) => await PersonDbContext.Person
-                .Where(person => person.CPF == CPF)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(ct);
+        public async Task<Person?> GetPersonByCPF(string cpf, CancellationToken ct) => await PersonDbContext.Person
+            .Where(person => person.CPF == cpf)
+            .AsNoTracking()
+            .SingleOrDefaultAsync(ct);
 
         public Task<Person> GetPersonById(long personId, CancellationToken ct)
         {
@@ -33,6 +33,7 @@ namespace PersonCRUD.Infra.Repository
         public async Task<Person> RegisterPerson(Person person, CancellationToken ct)
         {
             await PersonDbContext.Person.AddAsync(person, ct);
+            await PersonDbContext.SaveChangesAsync(ct);
             return person;
         }
 
