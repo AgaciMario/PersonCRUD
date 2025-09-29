@@ -33,7 +33,6 @@ namespace PersonCRUD.Domain.Services
             {
                 throw;
             }
-            
         }
 
         public async void ValidateIfPersonIsRegistered(string cpf, CancellationToken ct = default)

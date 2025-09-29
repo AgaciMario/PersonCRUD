@@ -2,6 +2,8 @@
 {
     public class Person
     {
+        protected Person() { }
+
         public Person(string name, string sex, string email, DateTime birthDate, string placeOfBirth, string nationality, string cpf)
         {
             Name = name;
