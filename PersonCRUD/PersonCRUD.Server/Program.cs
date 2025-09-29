@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
 using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.Domain.Services;
 using PersonCRUD.Infra.Context;
 using PersonCRUD.Infra.Repository;
 using PersonCRUD.Server.Middleware;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,30 @@ builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Person API",
+        Description = "An ASP.NET Core Web API for managing Person information",
+        Contact = new OpenApiContact
+        {
+            Name = "Agaci Mário",
+            Email = "agaci.nobre@gmail.com",
+            Url = new Uri("http://www.linkedin.com/in/agaci-m%C3%A1rio-a782931ab")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "MIT License",
+            Url = new Uri("https://opensource.org/license/mit")
+        }
+    });
+
+    // Gerando xml de documentação a partir dos comentários no código (XML Comments)
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
 
 
 // Resolvendo dependências da aplicação

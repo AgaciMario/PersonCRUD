@@ -8,6 +8,8 @@ namespace PersonCRUD.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
+    [Consumes("application/json")]
     public class PersonController : ControllerBase
     {
         private IMediator Mediator { get; set; }
@@ -34,16 +36,16 @@ namespace PersonCRUD.Server.Controllers
         ///     POST /person
         ///     {
         ///       "name": "João Alberto",
-        ///       "sex": null,
-        ///       "email": null,
+        ///       "sex": "Male",
+        ///       "email": joao_alberto@gmail.com,
         ///       "birthDate": "2000-03-06",
-        ///       "placeOfBirth": null,
-        ///       "nationality": null,
-        ///       "cpf": "123.123.123.12"
+        ///       "placeOfBirth": "Sobral-CE",
+        ///       "nationality": "Brasilerio",
+        ///       "cpf": "12312312312"
         ///     }
         ///
         /// </remarks>
-        /// <response code="201">Returns the newly created item</response>
+        /// <response code="200">Returns the newly created item</response>
         /// <response code="400">If some information on the request is invalid</response>
         /// <response code="500">If some server side error occur</response>
         [HttpPost(Name = "CreatePerson")]
@@ -53,6 +55,7 @@ namespace PersonCRUD.Server.Controllers
         public async Task<ActionResult> Post([FromBody] CreatePersonCommand command, CancellationToken cancellationToken = default)
         {
             PersonDTO dto = await Mediator.Send(command, cancellationToken);
+            // TODO: return 201 Created with the uri to the created resource, once the get by id endpoint is implemented
             return Ok(dto);
         }
 
