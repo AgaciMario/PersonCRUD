@@ -37,7 +37,7 @@ namespace PersonCRUD.Server.Controllers
         ///     {
         ///       "name": "João Alberto",
         ///       "sex": "Male",
-        ///       "email": joao_alberto@gmail.com,
+        ///       "email": "joao_alberto@gmail.com",
         ///       "birthDate": "2000-03-06",
         ///       "placeOfBirth": "Sobral-CE",
         ///       "nationality": "Brasilerio",
