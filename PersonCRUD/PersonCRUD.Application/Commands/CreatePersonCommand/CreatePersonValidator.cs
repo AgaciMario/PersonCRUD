@@ -44,7 +44,7 @@ namespace PersonCRUD.Application.Commands.CreatePersonCommand
             {
                 // TODO: Realizar limpeza do CPF removendo caracteres não numéricos
                 // TODO: Implementar uma validação de CPF mais robusta calcular os digitos verificadores
-                string cpfRegex = @"^\d{3}\.\d{3}\.\d{3}-\d{2}$|^\d{11}$";
+                string cpfRegex = @"^\d{11}$";
 
                 if (!Regex.IsMatch(command.CPF, cpfRegex))
                 {
