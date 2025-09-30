@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
 using PersonCRUD.Application.Commands.DeletePersonCommand;
@@ -62,18 +63,17 @@ namespace PersonCRUD.Server.Controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="200">Returns the newly created item</response>
+        /// <response code="201">Returns the newly created item</response>
         /// <response code="400">If some information on the request is invalid</response>
         /// <response code="500">If some server side error occur</response>
         [HttpPost(Name = "CreatePerson")]
-        [ProducesResponseType(typeof(PersonDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PersonDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Post([FromBody] CreatePersonCommand command, CancellationToken ct = default)
         {
             PersonDTO dto = await Mediator.Send(command, ct);
-            // TODO: return 201 Created with the uri to the created resource, once the get by id endpoint is implemented
-            return Ok(dto);
+            return Created($"{Request.GetDisplayUrl()}/{dto.Id}", dto);
         }
 
         /// <summary>
