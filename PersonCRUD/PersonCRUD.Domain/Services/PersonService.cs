@@ -45,7 +45,7 @@ namespace PersonCRUD.Domain.Services
             {
                 // TODO: Adicionar exception propria pois a null ArgumentNullException adiciona conteudo a mensagem de erro.
                 Person? existingPerson = await _personRepository.GetPersonById(person.id, ct)
-                    ?? throw new NotFoundException("A Person with the given id was not found");
+                    ?? throw new NotFoundException("A person with the given id was not found");
 
                 existingPerson.Update(
                     person.name,

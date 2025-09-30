@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
 using PersonCRUD.Application.Commands.UpdatePersonCommand;
 using PersonCRUD.Application.DTOs;
+using PersonCRUD.Application.Querys.GetPersonByIdQuery;
 using PersonCRUD.Server.Models.Request;
 using PersonCRUD.Server.Records;
 
@@ -21,10 +22,23 @@ namespace PersonCRUD.Server.Controllers
             this.Mediator = mediator;
         }
 
-        [HttpGet(Name = "GetPerson")]
-        public IEnumerable<object> Get()
-        {   
-            throw new NotImplementedException();
+        /// <summary>
+        /// Search for a person with the informed id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The person infromation</returns>
+        /// <response code="200">Returns the person infromation</response>
+        /// <response code="404">If there is no person with the id informed in the database</response>
+        /// <response code="500">If some server side error occur</response>
+        [HttpGet("{id}", Name = "GetPerson")]
+        [ProducesResponseType(typeof(PersonDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> Get([FromRoute] long id, CancellationToken ct = default)
+        {
+            GetPersonByIdQuery query = new GetPersonByIdQuery(id);
+            PersonDTO dto = await Mediator.Send(query, ct);
+            return Ok(dto);
         }
 
         /// <summary>

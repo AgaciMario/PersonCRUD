@@ -2,7 +2,6 @@
 using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.Domain.Entities;
 using PersonCRUD.Infra.Context;
-using System.Threading;
 
 namespace PersonCRUD.Infra.Repository
 {
