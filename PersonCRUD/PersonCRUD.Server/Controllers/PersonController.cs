@@ -6,6 +6,7 @@ using PersonCRUD.Application.Commands.DeletePersonCommand;
 using PersonCRUD.Application.Commands.UpdatePersonCommand;
 using PersonCRUD.Application.DTOs;
 using PersonCRUD.Application.Querys.GetPersonByIdQuery;
+using PersonCRUD.Application.Querys.GetPersonPaginatedQuery;
 using PersonCRUD.Server.Models.Request;
 using PersonCRUD.Server.Records;
 
@@ -22,6 +23,28 @@ namespace PersonCRUD.Server.Controllers
         public PersonController(IMediator mediator)
         {
             this.Mediator = mediator;
+        }
+
+        // TODO: documentar exemplos de request para todos os endpoints
+
+        /// <summary>
+        /// Returns a paginated list of persons.
+        /// </summary>
+        /// <returns>A list of persons in the specified page</returns>
+        /// <param name="pageSize">Number of records per page</param>
+        /// <param name="currentPage">Page index starting from 1</param>
+        /// <response code="200">A list of persons in the specified page</response>
+        /// <response code="400">If some query parameter is invalid</response>
+        /// <response code="500">If some server side error occur</response>
+        [HttpGet(Name = "GetAllPerson")]
+        [ProducesResponseType(typeof(List<PersonDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> GetPaginated([FromQuery] int currentPage, [FromQuery] int pageSize, CancellationToken ct = default)
+        {
+            GetPersonPaginatedQuery command = new GetPersonPaginatedQuery(currentPage, pageSize);
+            List<PersonDTO> dto = await Mediator.Send(command, ct);
+            return Ok(dto);
         }
 
         /// <summary>

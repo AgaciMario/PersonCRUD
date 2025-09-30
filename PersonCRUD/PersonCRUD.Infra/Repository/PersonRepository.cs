@@ -44,5 +44,12 @@ namespace PersonCRUD.Infra.Repository
             await PersonDbContext.SaveChangesAsync(ct);
             return person;
         }
+
+        public async Task<List<Person>> GetPersonPaginated(int currentPage, int pageSize, CancellationToken ct) => await PersonDbContext.Person
+            .AsNoTracking()
+            .Where(person => person.DeletedAt == null)
+            .Skip((currentPage - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(ct);
     }
 }

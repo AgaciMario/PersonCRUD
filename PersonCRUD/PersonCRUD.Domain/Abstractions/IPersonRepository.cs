@@ -9,5 +9,6 @@ namespace PersonCRUD.Domain.Abstractions
         Task<Person> DeletePerson(Person person, CancellationToken ct);
         Task<Person?> GetPersonById(long personId, CancellationToken ct);
         Task<Person?> GetPersonByCPF(string cpf, CancellationToken ct);
+        Task<List<Person>> GetPersonPaginated(int currentPage, int pageSize, CancellationToken ct);
     }
 }
