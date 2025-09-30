@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
+using PersonCRUD.Application.Commands.DeletePersonCommand;
 using PersonCRUD.Application.Commands.UpdatePersonCommand;
 using PersonCRUD.Application.DTOs;
 using PersonCRUD.Application.Querys.GetPersonByIdQuery;
@@ -23,7 +24,7 @@ namespace PersonCRUD.Server.Controllers
         }
 
         /// <summary>
-        /// Search for a person with the informed id.
+        /// Searches for a person.
         /// </summary>
         /// <param name="id"></param>
         /// <returns>The person infromation</returns>
@@ -100,7 +101,7 @@ namespace PersonCRUD.Server.Controllers
         /// <response code="400">If some information on the request is invalid</response>
         /// <response code="404">If there is no person with the given id in the database</response>
         /// <response code="500">If some server side error occur</response>
-        [HttpPut("/{id}", Name = "UpdatePerson")]
+        [HttpPut("{id}", Name = "UpdatePerson")]
         [ProducesResponseType(typeof(PersonDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -122,10 +123,23 @@ namespace PersonCRUD.Server.Controllers
             return Ok(dto);
         }
 
-        [HttpDelete(Name = "DeletePerson")]
-        public IEnumerable<object> Delete()
+        /// <summary>
+        /// Deletes a person.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The person infromation</returns>
+        /// <response code="204">Returns empty body, the person was deleted successfully</response>
+        /// <response code="404">If there is no person with the id informed in the database</response>
+        /// <response code="500">If some server side error occur</response>
+        [HttpDelete("{id}", Name = "DeletePerson")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> Delete([FromRoute] long id, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            DeletePersonCommand command = new DeletePersonCommand(id);
+            await Mediator.Send(command, ct);
+            return NoContent();
         }
     }
 }

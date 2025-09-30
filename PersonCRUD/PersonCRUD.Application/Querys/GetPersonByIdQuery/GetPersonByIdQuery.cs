@@ -7,11 +7,10 @@ namespace PersonCRUD.Application.Querys.GetPersonByIdQuery
     {
         public GetPersonByIdQuery(long id)
         {
-            if(Id < 1) throw new ArgumentException("Id must be greater than zero.", nameof(Id));
+            if(id <= 0) throw new ArgumentException("Id must be greater than zero.", nameof(Id));
             Id = id;
         }
 
         public long Id { get; }
     }
-
 }

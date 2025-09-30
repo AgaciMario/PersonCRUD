@@ -14,18 +14,20 @@ namespace PersonCRUD.Infra.Repository
             PersonDbContext = personDbContext;
         }
 
-        public Task<Person> DeletePerson(long personId, CancellationToken ct)
+        public async Task<Person> DeletePerson(Person person, CancellationToken ct)
         {
-            throw new NotImplementedException();
+            PersonDbContext.Person.Update(person);
+            await PersonDbContext.SaveChangesAsync(ct);
+            return person;
         }
 
         public async Task<Person?> GetPersonByCPF(string cpf, CancellationToken ct) => await PersonDbContext.Person
-            .Where(person => person.CPF == cpf)
+            .Where(person => person.CPF == cpf && person.DeletedAt == null)
             .AsNoTracking()
             .SingleOrDefaultAsync(ct);
 
         public async Task<Person?> GetPersonById(long personId, CancellationToken ct) => await PersonDbContext.Person
-            .Where(person => person.Id == personId)
+            .Where(person => person.Id == personId && person.DeletedAt == null)
             .AsNoTracking()
             .SingleOrDefaultAsync(ct);
 

@@ -28,6 +28,7 @@
         public string CPF { get; private set; } = string.Empty;
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
+        public DateTime? DeletedAt { get; private set; }
 
         private void SetCPF(string cpf)
         {
@@ -46,6 +47,11 @@
             Nationality = nationality;
             SetCPF(cpf);
             UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void SetAsDeleted()
+        {
+            DeletedAt = DateTime.UtcNow;
         }
     }
 }
