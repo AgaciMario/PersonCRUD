@@ -40,6 +40,16 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost5173",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 // Resolvendo dependências da aplicação
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
@@ -49,6 +59,8 @@ builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddDbContext<PersonDbContext>(options => options.UseInMemoryDatabase("Person"));
 
 var app = builder.Build();
+
+app.UseCors("AllowLocalhost5173");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
