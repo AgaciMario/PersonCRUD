@@ -9,8 +9,8 @@ as seguintes operações:
 
 - [x] Cadastro: Inserir novos registros de pessoas.
 - [x] Alteração: Atualizar informações de registros existentes.
-- [ ] Remoção: Excluir registros de pessoas.
-- [ ] Consulta: Buscar registros de pessoas.
+- [x] Remoção: Excluir registros de pessoas.
+- [x] Consulta: Buscar registros de pessoas.
 
 - [x] Informações a serem cadastradas:
 - [x] Nome: obrigatório
@@ -36,9 +36,9 @@ O código fonte da aplicação deve ser disponibilizado em um
 repositório público no GitHub ou GitLab.
 
 ## Extras
-- [ ] Documentação: Fornecer documentação dos endpoints utilizando Swagger.
+- [x] Documentação: Fornecer documentação dos endpoints utilizando Swagger.
 - [ ] Banco de Dados: Implementar a aplicação utilizando H2.
-- [ ] Utilizar CQRS(Comand Query Responsability Segregation) com MediatR(mediador).
+- [x] Utilizar CQRS(Comand Query Responsability Segregation) com MediatR(mediador).
 - [ ] Versão da API: Criar uma versão 2 da API que inclua o endereço da pessoa como dado obrigatório. A versão 1 deve continuar funcional.
 - [ ] Autenticação: Implementar autenticação via JSON Web Token
 - [ ] (JWT) para acesso à aplicação, permitindo apenas usuários pré-
