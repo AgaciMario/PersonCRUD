@@ -1,6 +1,6 @@
 const API_BASE = "http://localhost:5194/Person"; 
 
-export async function getPeople(page, pageSize) {
+export async function getPersonPaginated(page, pageSize) {
     const url = new URL(API_BASE);
     url.searchParams.append("currentPage", page);
     url.searchParams.append("pageSize", pageSize);
@@ -13,7 +13,7 @@ export async function getPeople(page, pageSize) {
     });
 
     if (!response.ok) {
-        throw new Error("Erro ao buscar pessoas");
+        throw new Error("Erro while feching persons");
     }
 
     return await response.json();
