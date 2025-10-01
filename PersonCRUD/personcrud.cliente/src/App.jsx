@@ -5,20 +5,21 @@ import './App.css'
 
 function App() {
     const [data, setData] = useState([]);
-    //const [currentPage, setCurrentPage] = useState(1);
-    //const pageSize = 10; // quantos registros por página
+    const [pageSize, setPageSize] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
     //const totalPages = Math.ceil(data.length / pageSize);
 
-    const loadPersons = async () => {
+    const loadPersons = async (currentPage, pageSize) => {
         try {
-            const response = await getPersonPaginated(1, 10)
+            const response = await getPersonPaginated(currentPage, pageSize)
             setData(response);
         } catch (error) {
             console.error("Erro ao carregar pessoas:", error);
         }
     }
 
-    useEffect(() => { loadPersons() }, []);
+    useEffect(() => { loadPersons(currentPage, pageSize) }, []);
+    useEffect(() => { loadPersons(currentPage, pageSize) }, [currentPage, pageSize]);
 
     return (
         <div className="container mt-4">
@@ -27,10 +28,27 @@ function App() {
             <PersonTable data={data} />
 
             <nav>
-                <ul className="pagination">
-                    <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                    <li className="page-item"><a className="page-link" href="#">Next</a></li>
-                </ul>
+                <div className="row">
+
+                    <div className="col-2">
+                        <select
+                            value={pageSize} onChange={e => setPageSize(e.target.value)}
+                            className="form-select" aria-label="Page sizse select"
+                        >
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+
+                    <div className="col">
+                        <ul className="pagination">
+                            <li className="page-item"><a onClick={ () => currentPage > 1 && setCurrentPage(currentPage - 1) } className="page-link" href="#">Anterior</a></li>
+                            <li className={data.length <= 0 ? "page-item disabled" : "page-item"}><a onClick={() => setCurrentPage(currentPage + 1)} className="page-link" href="#">Proximo</a></li>
+                        </ul>
+                    </div>
+
+                </div>
             </nav>
         </div>
     );
