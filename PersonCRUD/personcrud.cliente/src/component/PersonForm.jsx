@@ -1,10 +1,12 @@
 ﻿import { useForm } from 'react-hook-form'
+import { CreatePerson } from '../api/PersonAPI'
 
 function PersonForm({ fromId }) {
 
     const { register, handleSubmit, formState: { errors } } = useForm()
 
     const onSubmit = (data) => {
+        CreatePerson(data)
         console.log(data)
     }
 

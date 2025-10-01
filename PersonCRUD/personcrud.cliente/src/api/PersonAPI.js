@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5194/Person"; 
+﻿const API_BASE = "http://localhost:5194/Person"; 
 
 export async function getPersonPaginated(page, pageSize) {
     const url = new URL(API_BASE);
@@ -42,6 +42,22 @@ export async function updatePerson(cpf, personData) {
 
     if (!response.ok) {
         throw new Error("Erro ao atualizar pessoa");
+    }
+
+    return await response.json();
+}
+
+export async function CreatePerson(personData) {
+    const response = await fetch(`${API_BASE}/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(personData),
+    });
+
+    if (!response.ok) {
+        throw new Error("Erro ao criar pessoa");
     }
 
     return await response.json();
