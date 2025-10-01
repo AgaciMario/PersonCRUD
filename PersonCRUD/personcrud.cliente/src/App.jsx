@@ -18,7 +18,6 @@ function App() {
         }
     }
 
-    useEffect(() => { loadPersons(currentPage, pageSize) }, []);
     useEffect(() => { loadPersons(currentPage, pageSize) }, [currentPage, pageSize]);
 
     return (

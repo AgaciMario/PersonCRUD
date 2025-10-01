@@ -7,7 +7,6 @@ function PersonForm({ fromId }) {
 
     const onSubmit = (data) => {
         CreatePerson(data)
-        console.log(data)
     }
 
     return(
