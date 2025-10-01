@@ -12,7 +12,7 @@ function PersonTable({ data = [] }) {
             <td>{person.nationality}</td>
             <td>{person.cpf}</td>
             <td>
-                <button className="btn btn-primary me-2">Editar</button>
+                <button className="btn btn-secondary me-2">Editar</button>
                 <button className="btn btn-danger">Excluir</button>
             </td>
         </tr>
