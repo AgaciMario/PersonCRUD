@@ -25,9 +25,10 @@ function PersonModal() {
                                     <div className="col-md-4">
                                         <label htmlFor="Sex" className="form-label">Sexo</label>
                                         <input type="text" className="form-control" id="Sex" />
+                                        <div id="CPFHelp" className="form-text">Use N/A caso prefira não informar</div>
                                     </div>
                                 </div>
-
+                                
                                 <div className="row mb-3">
                                     <div className="col-md-6">
                                         <label htmlFor="Email" className="form-label">Email</label>
@@ -35,10 +36,11 @@ function PersonModal() {
                                     </div>
                                     <div className="col-md-6">
                                         <label htmlFor="CPF" className="form-label">CPF</label>
-                                        <input type="text" className="form-control" id="CPF" />
+                                        <input type="text" className="form-control" id="CPF" aria-describedby="CPFHelp" />
+                                        <div id="CPFHelp" className="form-text">Use somente números</div>
                                     </div>
                                 </div>
-                                 
+                                     
                                 <div className="row mb-3">
                                     <div className="col-md-4">
                                         <label htmlFor="BirthDate" className="form-label">Data de nascimento</label>
@@ -46,11 +48,13 @@ function PersonModal() {
                                     </div>
                                     <div className="col-md-4">
                                         <label htmlFor="BirthPlace" className="form-label">Naturalidade</label>
-                                        <input type="text" className="form-control" id="BirthPlace" />
+                                        <input type="text" className="form-control" id="BirthPlace" aria-describedby="BithPalceHelp" />
+                                        <div id="BithPalceHelp" className="form-text">Informe a cidade de nascimento</div>
                                     </div>
                                     <div className="col-md-4">
                                         <label htmlFor="Nationality" className="form-label">Nacionalidade</label>
                                         <input type="text" className="form-control" id="Nationality" />
+                                        <div id="BithPalceHelp" className="form-text">Informe o país de nascimento</div>
                                     </div>
                                 </div>
                             </form>
