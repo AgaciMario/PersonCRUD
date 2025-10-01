@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-function PersonForm() {
+function PersonForm({ fromId }) {
 
     const { register, handleSubmit } = useForm()
 
@@ -8,7 +8,7 @@ function PersonForm() {
 
     return(
         <>
-            <form className="text-start" onSubmit={handleSubmit(onSubmit)}>
+            <form id={ fromId } className="text-start" onSubmit={handleSubmit(onSubmit)}>
                 <div className="row mb-3">
                     <div className="col-md-8">
                         <label htmlFor="Name" className="form-label">Nome</label>
@@ -17,10 +17,10 @@ function PersonForm() {
                     <div className="col-md-4">
                         <label htmlFor="Gender" className="form-label">Sex</label>
                         <input {...register("Sex")} type="text" className="form-control" id="Gender" aria-describedby='genderHelp'/>
-                        <div id="genderHelp" className="form-text">Use N/A caso prefira nÃ£o informar</div>
+                        <div id="genderHelp" className="form-text">Use N/A caso prefira não informar</div>
                     </div>
                 </div>
-                
+
                 <div className="row mb-3">
                     <div className="col-md-6">
                         <label htmlFor="Email" className="form-label">Email</label>
@@ -29,10 +29,10 @@ function PersonForm() {
                     <div className="col-md-6">
                         <label htmlFor="CPF" className="form-label">CPF</label>
                         <input {...register("CPF")} type="text" className="form-control" id="CPF" aria-describedby="CPFHelp" />
-                        <div id="CPFHelp" className="form-text">Use somente nÃºmeros</div>
+                        <div id="CPFHelp" className="form-text">Use somente números</div>
                     </div>
                 </div>
-                        
+
                 <div className="row mb-3">
                     <div className="col-md-4">
                         <label htmlFor="BirthDate" className="form-label">Data de nascimento</label>
@@ -46,11 +46,9 @@ function PersonForm() {
                     <div className="col-md-4">
                         <label htmlFor="Nationality" className="form-label">Nacionalidade</label>
                         <input {...register("Nationality")} type="text" className="form-control" id="Nationality" />
-                        <div className="form-text">Informe o paÃ­s de nascimento</div>
+                        <div className="form-text">Informe o país de nascimento</div>
                     </div>
-                </div>
-
-                <button type="submit" className="btn btn-success">Salvar</button>
+                </div>  
             </form>
         </>
     )

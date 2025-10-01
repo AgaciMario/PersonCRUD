@@ -1,6 +1,9 @@
-import PersonForm from './PersonForm';
+import PersonForm  from './PersonForm'
 
 function PersonModal() {
+
+    const formId = "personForm";
+
     return (
         <>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#personModal">
@@ -16,12 +19,12 @@ function PersonModal() {
                         </div>
                         <div className="modal-body">
 
-                            <PersonForm />
+                            <PersonForm fromId={formId} />
 
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" className="btn btn-success">Salvar</button>
+                            <button form="personForm" type="submit" className="btn btn-success">Salvar</button>
                         </div>
                     </div>
                 </div>
