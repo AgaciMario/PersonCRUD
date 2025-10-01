@@ -33,7 +33,7 @@ function App() {
                 </div>
             </div>
 
-            <PersonTable data={data} onAction={loadPersons} />
+            <PersonTable data={data} />
 
             <nav>
                 <div className="row">

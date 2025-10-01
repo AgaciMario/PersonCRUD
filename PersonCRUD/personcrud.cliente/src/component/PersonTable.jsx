@@ -1,19 +1,16 @@
-﻿import { useState, useEffect } from 'react';
+﻿import { useState } from 'react';
 import { deletePerson } from '../api/PersonAPI';
 
-function PersonTable({ data = [], OnAction }) {
+function PersonTable({ data = [] }) {
     let [selectedPerson, setSelectedPerson] = useState(null);
 
     const handleDelete = (person) => {
         setSelectedPerson(person);
     }
 
-    const updatePersonList = () => { OnAction(1, 10); }
-
     const confirmDelete = (personId) => {
         if (selectedPerson) {
             deletePerson(personId)
-            updatePersonList()
         }
     }
 
