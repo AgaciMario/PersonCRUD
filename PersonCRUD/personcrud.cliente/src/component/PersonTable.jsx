@@ -1,5 +1,4 @@
 import React from 'react';
-import TableRow from './TableRow';
 
 function PersonTable({ data = [] }) {
 
