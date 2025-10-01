@@ -19,8 +19,8 @@ export async function getPersonPaginated(page, pageSize) {
     return await response.json();
 }
 
-export async function deletePerson(cpf) {
-    const response = await fetch(`${API_BASE}/${cpf}`, {
+export async function deletePerson(id) {
+    const response = await fetch(`${API_BASE}/${id}`, {
         method: "DELETE",
     });
 
