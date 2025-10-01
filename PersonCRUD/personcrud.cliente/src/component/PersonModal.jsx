@@ -24,7 +24,7 @@ function PersonModal() {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button form="personForm" type="submit" className="btn btn-success">Salvar</button>
+                            <button form={formId} type="submit" className="btn btn-success">Salvar</button>
                         </div>
                     </div>
                 </div>
