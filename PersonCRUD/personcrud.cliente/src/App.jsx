@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { getPersonPaginated } from '../src/api/PersonAPI'
 import PersonTable from './component/PersonTable.jsx'
+import PersonModal from './component/PersonModal.jsx'
 import './App.css'
 
 function App() {
@@ -23,6 +24,16 @@ function App() {
     return (
         <div className="container mt-4">
             <h3>Lista de Pessoas</h3>
+            <div className="row">
+
+                <div className="col-10">
+                </div>
+
+                <div className="col-2">
+                    <PersonModal />
+                </div>
+
+            </div>
 
             <PersonTable data={data} />
 
