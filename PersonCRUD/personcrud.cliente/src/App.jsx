@@ -7,7 +7,6 @@ function App() {
     const [data, setData] = useState([]);
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    //const totalPages = Math.ceil(data.length / pageSize);
 
     const loadPersons = async (currentPage, pageSize) => {
         try {
