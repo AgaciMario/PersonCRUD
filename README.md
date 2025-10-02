@@ -27,10 +27,10 @@ armazenadas.
 O front-end deve ser desenvolvido utilizando React 17 ou superior e deve
 proporcionar uma interface amigável para o usuário realizar as operações
 de:  
-- [x] cadastro,
-- [ ] alteração,
-- [x] remoção 
-- [ ] consulta.
+- [x] Cadastro: Inserir novos registros de pessoas.
+- [ ] Alteração: Atualizar informações de registros existentes.
+- [x] Remoção: Excluir registros de pessoas.
+- [ ] Consulta: Buscar registros de pessoas.
 
 ### Desejavel
 - [x] Utilizar formulário reativo react-hook-form
