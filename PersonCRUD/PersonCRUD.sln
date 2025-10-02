@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36408.4 d17.14
+VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonCRUD.Server", "PersonCRUD.Server\PersonCRUD.Server.csproj", "{0621AB8D-6000-465A-A79B-92CDB0785600}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonCRUD.Application", "PersonCRUD.Application\PersonCRUD.Application.csproj", "{9FFD1D53-D0F0-400C-BC4C-94976C7F6205}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonCRUD.Infra", "PersonCRUD.Infra\PersonCRUD.Infra.csproj", "{6071D95F-9F8B-4B9D-877A-9FDE42175109}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "personcrud.cliente", "PersonCRUD.Cliente\personcrud.cliente.esproj", "{AF1226B0-430E-F1A7-8F27-415E66970619}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,12 @@ Global
 		{6071D95F-9F8B-4B9D-877A-9FDE42175109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6071D95F-9F8B-4B9D-877A-9FDE42175109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6071D95F-9F8B-4B9D-877A-9FDE42175109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF1226B0-430E-F1A7-8F27-415E66970619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF1226B0-430E-F1A7-8F27-415E66970619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF1226B0-430E-F1A7-8F27-415E66970619}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AF1226B0-430E-F1A7-8F27-415E66970619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF1226B0-430E-F1A7-8F27-415E66970619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF1226B0-430E-F1A7-8F27-415E66970619}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
