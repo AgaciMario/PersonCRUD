@@ -26,10 +26,14 @@ armazenadas.
 ## Front-end
 O front-end deve ser desenvolvido utilizando React 17 ou superior e deve
 proporcionar uma interface amigável para o usuário realizar as operações
-de cadastro, alteração, remoção e consulta.
+de:  
+- [x] cadastro,
+- [ ] alteração,
+- [x] remoção 
+- [ ] consulta.
 
 ### Desejavel
-- [ ] Utilizar formulário reativo react-hook-form
+- [x] Utilizar formulário reativo react-hook-form
 
 ## Código fonte
 O código fonte da aplicação deve ser disponibilizado em um
