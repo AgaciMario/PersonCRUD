@@ -1,10 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+ï»¿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
 using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.Domain.Services;
 using PersonCRUD.Infra.Context;
 using PersonCRUD.Infra.Repository;
+using PersonCRUD.Infra.Seed;
 using PersonCRUD.Server.Middleware;
 using System.Reflection;
 
@@ -24,7 +25,7 @@ builder.Services.AddSwaggerGen(options =>
         Description = "An ASP.NET Core Web API for managing Person information",
         Contact = new OpenApiContact
         {
-            Name = "Agaci Mário",
+            Name = "Agaci MÃ¡rio",
             Email = "agaci.nobre@gmail.com",
             Url = new Uri("http://www.linkedin.com/in/agaci-m%C3%A1rio-a782931ab")
         },
@@ -35,7 +36,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
-    // Gerando xml de documentação a partir dos comentários no código (XML Comments)
+    // Gerando xml de documentaÃ§Ã£o a partir dos comentÃ¡rios no cÃ³digo (XML Comments)
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
@@ -51,7 +52,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-// Resolvendo dependências da aplicação
+// Resolvendo dependÃªncias da aplicaÃ§Ã£o
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 
@@ -61,6 +62,12 @@ builder.Services.AddDbContext<PersonDbContext>(options => options.UseInMemoryDat
 var app = builder.Build();
 
 app.UseCors("AllowLocalhost5173");
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PersonDbContext>();
+    DbSeed.Initialize(db);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
