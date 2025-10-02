@@ -49,7 +49,7 @@ function App() {
                     <div className="col">
                         <ul className="pagination">
                             <li className={currentPage <= 1 ? "page-item disabled" : "page-item"}><a onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)} className="page-link" href="#">Anterior</a></li>
-                            <li className={data.length <= 10 ? "page-item disabled" : "page-item"}>
+                            <li className={data.length <= 0  ? "page-item disabled" : "page-item"}>
                                 <a onClick={() => setCurrentPage(currentPage + 1)} className="page-link">Proximo</a>
                             </li>
                         </ul>
