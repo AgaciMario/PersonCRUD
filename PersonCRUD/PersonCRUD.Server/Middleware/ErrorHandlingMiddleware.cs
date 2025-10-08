@@ -14,7 +14,7 @@ namespace PersonCRUD.Server.Middleware
         public async Task InvokeAsync(HttpContext context)
         {
             //TODO: Padronizar casos de exception por falha na deserialização.
-
+            //TODO: Validar o uso do nameof para os casos de bad request pois os nomes estão com inicial maíscula
             try
             {
                 await _next(context);

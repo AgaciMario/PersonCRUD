@@ -46,6 +46,8 @@ namespace PersonCRUD.Domain.Services
                 Person? existingPerson = await _personRepository.GetPersonById(person.id, ct)
                     ?? throw new NotFoundException("A person with the given id was not found");
 
+                // TODO:Validar se o novo cpf mudou, caso tenha mudado temos que verificar se o novo cpf já não esta sendo usado por outra pessoa.
+
                 existingPerson.Update(
                     person.name,
                     person.sex,
