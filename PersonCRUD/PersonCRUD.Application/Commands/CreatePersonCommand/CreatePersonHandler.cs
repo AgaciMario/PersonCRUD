@@ -21,8 +21,6 @@ namespace PersonCRUD.Application.Commands.CreatePersonCommand
             // TODO: mudar mapping para usar AutoMapper ou isolar o mapeamento em uma classe propria;
             try
             {
-                CreatePersonValidator.Validate(request);
-
                 Person newPerson = await personService.CreatePerson(new( 
                     name: request.Name,
                     sex: request.Sex,

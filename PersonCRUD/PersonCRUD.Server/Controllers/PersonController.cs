@@ -1,4 +1,4 @@
-using MediatR;
+Ôªøusing MediatR;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
@@ -76,7 +76,7 @@ namespace PersonCRUD.Server.Controllers
         ///
         ///     POST /person
         ///     {
-        ///       "name": "Jo„o Alberto",
+        ///       "name": "Jo√£o Alberto",
         ///       "sex": "Male",
         ///       "email": "joao_alberto@gmail.com",
         ///       "birthDate": "2000-03-06",
@@ -110,7 +110,7 @@ namespace PersonCRUD.Server.Controllers
         ///
         ///     PUT /person/{id}
         ///     {
-        ///       "name": "Jo„o Alberto",
+        ///       "name": "Jo√£o Alberto",
         ///       "sex": "Male",
         ///       "email": "joao_alberto@gmail.com",
         ///       "birthDate": "2000-03-06",

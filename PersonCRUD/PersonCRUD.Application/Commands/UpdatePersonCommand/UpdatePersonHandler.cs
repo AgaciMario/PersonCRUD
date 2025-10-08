@@ -20,8 +20,6 @@ namespace PersonCRUD.Application.Commands.UpdatePersonCommand
 		{
 			try
 			{
-				UpdatePersonValidator.Validate(command);
-
 				Person updatedPerson = await PersonService.UpdatePerson(new(
 					id: command.Id,
 					name: command.Name,
