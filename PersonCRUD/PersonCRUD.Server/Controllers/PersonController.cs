@@ -16,23 +16,22 @@ namespace PersonCRUD.Server.Controllers
     [Route("[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class PersonController : ControllerBase
+    public class PersonController(IMediator mediator) : ControllerBase
     {
-        private IMediator Mediator { get; set; }
-
-        public PersonController(IMediator mediator)
-        {
-            this.Mediator = mediator;
-        }
-
-        // TODO: documentar exemplos de request para todos os endpoints
+        private IMediator Mediator { get; set; } = mediator;
 
         /// <summary>
         /// Returns a paginated list of persons.
         /// </summary>
-        /// <returns>A list of persons in the specified page</returns>
         /// <param name="pageSize">Number of records per page</param>
         /// <param name="currentPage">Page index starting from 1</param>
+        /// <returns>A list of persons in the specified page</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /Person?currentPage={currentPage}&amp;pageSize={pageSize}
+        ///
+        /// </remarks>
         /// <response code="200">A list of persons in the specified page</response>
         /// <response code="400">If some query parameter is invalid</response>
         /// <response code="500">If some server side error occur</response>
@@ -52,6 +51,12 @@ namespace PersonCRUD.Server.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>The person infromation</returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     GET /Person/{id}
+        ///
+        /// </remarks>
         /// <response code="200">Returns the person infromation</response>
         /// <response code="404">If there is no person with the id informed in the database</response>
         /// <response code="500">If some server side error occur</response>
@@ -151,6 +156,12 @@ namespace PersonCRUD.Server.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>The person infromation</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     Delete /person/{id}
+        ///
+        /// </remarks>
         /// <response code="204">Returns empty body, the person was deleted successfully</response>
         /// <response code="404">If there is no person with the id informed in the database</response>
         /// <response code="500">If some server side error occur</response>
