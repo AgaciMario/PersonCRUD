@@ -5,20 +5,12 @@ import PersonModal from './component/PersonModal.jsx'
 import DeleteModal from './component/DeleteModal.jsx'
 
 function App() {
-    const [data, setData] = useState([]);
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
+    const [data, setData] = useState([]);
+    let [personToDelete, setPersonToDelete] = useState({}); //TODO: encontrar um nome melhor para esta variável.
 
-    const loadPersons = async (currentPage = 1, pageSize = 10) => {
-        try {
-            const response = await getPersonPaginated(currentPage, pageSize)
-            setData(response);
-        } catch (error) {
-            console.error("Erro ao carregar pessoas:", error);
-        }
-    }
-
-    useEffect(() => { loadPersons(currentPage, pageSize) }, [currentPage, pageSize]);
+    useEffect(() => { GetPersonData(currentPage, pageSize, setData) }, [currentPage, pageSize]);
 
     return (
         <div className="container mt-4">
@@ -40,7 +32,7 @@ function App() {
 
                     <div className="col-2">
                         <select
-                            value={pageSize} onChange={e => setPageSize(e.target.value)}className="form-select" aria-label="Page sizse select">
+                            value={pageSize} onChange={e => setPageSize(e.target.value)} className="form-select" aria-label="Page sizse select">
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
@@ -60,6 +52,15 @@ function App() {
             </nav>
         </div>
     );
+}
+
+async function GetPersonData(currentPage = 1, pageSize = 10, setData) {
+    try {
+        const response = await getPersonPaginated(currentPage, pageSize)
+        setData(response);
+    } catch (error) {
+        console.error("Erro ao carregar pessoas:", error);
+    }
 }
 
 export default App
