@@ -2,7 +2,7 @@
 import { getPersonPaginated } from '../src/api/PersonAPI'
 import PersonTable from './component/PersonTable.jsx'
 import PersonModal from './component/PersonModal.jsx'
-import './App.css'
+import DeleteModal from './component/DeleteModal.jsx'
 
 function App() {
     const [data, setData] = useState([]);
@@ -22,6 +22,7 @@ function App() {
 
     return (
         <div className="container mt-4">
+            <DeleteModal person={personToDelete} />
             <h3>Lista de Pessoas</h3>
             <div className="row">
                 <div className="col-10">
@@ -32,7 +33,7 @@ function App() {
                 </div>
             </div>
 
-            <PersonTable data={data} />
+            <PersonTable data={data} onDelete={setPersonToDelete} />
 
             <nav>
                 <div className="row">
