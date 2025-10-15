@@ -1,4 +1,4 @@
-﻿function PersonTable({ data = [], onDelete }) {
+﻿function PersonTable({ data = [], onDelete, onEdit }) {
 
     let tableRows = data.map((person) => (
         <tr key={person.cpf}>
@@ -10,7 +10,7 @@
             <td>{person.nationality}</td>
             <td>{person.cpf}</td>
             <td>
-                <button className="btn btn-secondary me-2">Editar</button>
+                <button className="btn btn-secondary me-2" onClick={() => onEdit(person)} data-bs-toggle="modal" data-bs-target="#editPersonModal">Editar</button>
                 <button className="btn btn-danger" onClick={() => onDelete(person)} data-bs-toggle="modal" data-bs-target="#DeleteModal">Excluir</button>
             </td>
         </tr>

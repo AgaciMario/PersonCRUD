@@ -3,17 +3,32 @@ import { getPersonPaginated } from '../src/api/PersonAPI'
 import PersonTable from './component/PersonTable.jsx'
 import PersonModal from './component/PersonModal.jsx'
 import DeleteModal from './component/DeleteModal.jsx'
+import EditPersonModal from './component/EditPersonModal.jsx'
 
 function App() {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    const [data, setData] = useState([]);
+    let [data, setData] = useState([]);
+
     let [personToDelete, setPersonToDelete] = useState({}); //TODO: encontrar um nome melhor para esta variável.
+    let [personToEdit, setPersonToEdit] = useState({
+        "name": "", 
+        "sex": "",
+        "email": "",
+        "birthDate": "",
+        "placeOfBirth": "",
+        "nationality": "",
+        "cpf": ""
+    }); //TODO: encontrar um nome melhor para esta variável.
+
+    // Nota: acima estamos configurando valores padrões para os campos do person pois precisamos indicar
+    // para o react que nosso inputs do EditPersonModal são controlados(undefined por padrão é não controlado)
 
     useEffect(() => { GetPersonData(currentPage, pageSize, setData) }, [currentPage, pageSize]);
 
     return (
         <div className="container mt-4">
+            <EditPersonModal person={personToEdit} />
             <DeleteModal person={personToDelete} />
             <h3>Lista de Pessoas</h3>
             <div className="row">
@@ -25,7 +40,7 @@ function App() {
                 </div>
             </div>
 
-            <PersonTable data={data} onDelete={setPersonToDelete} />
+            <PersonTable data={data} onDelete={setPersonToDelete} onEdit={setPersonToEdit} />
 
             <nav>
                 <div className="row">
