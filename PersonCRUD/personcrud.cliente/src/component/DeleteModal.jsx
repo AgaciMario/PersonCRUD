@@ -1,6 +1,10 @@
-﻿import { DeletePerson } from '../api/PersonAPI'
+﻿import { useRef } from 'react'
+import { DeletePerson } from '../api/PersonAPI'
 
 function DeleteModal({ person }) {
+    const btnDismissModalRef = useRef(null);
+
+    // TODO: definir HandleDeletePerson como uma constante aqui.
 
     return (
         <>
@@ -15,8 +19,8 @@ function DeleteModal({ person }) {
                             Tem certeza que deseja remover <strong>{person.name}</strong>?
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" className="btn btn-danger" onClick={() => HandleDeletePerson(person)}>Confirmar</button>
+                            <button ref={btnDismissModalRef} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" className="btn btn-danger" onClick={() => HandleDeletePerson(person, btnDismissModalRef)}>Confirmar</button>
                         </div>
                     </div>
                 </div>
@@ -25,10 +29,11 @@ function DeleteModal({ person }) {
     )
 }
 
-function HandleDeletePerson(person) {
+async function HandleDeletePerson(person, btnDismissModalRef) {
     try {
-        DeletePerson(person.id)
-        // TODO: Fechar o modal em caso de sucesso e recarregar a tabela.
+        await DeletePerson(person.id)
+        btnDismissModalRef.current.click() //Hack para fechar o modal
+
         // TODO: add toasty para caso de sucesso
     } catch (error) {
         // TODO: add toasty para caso de erro
