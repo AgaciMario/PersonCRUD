@@ -12,7 +12,7 @@ function EditPersonModal({ person }) {
     setValue("Sex", person.sex)
     setValue("Email", person.email)
     setValue("CPF", person.cpf)
-    setValue("BirthDate", birthDate.getFullYear() + "-" + birthDate.getMonth() + "-" + birthDate.getDate())
+    setValue("BirthDate", birthDate.getFullYear() + "-" + birthDate.getDate() + "-" + birthDate.getMonth())
     setValue("PlaceOfBirth", person.placeOfBirth)
     setValue("Nationality", person.nationality)
 

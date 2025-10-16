@@ -28,7 +28,7 @@ O front-end deve ser desenvolvido utilizando React 17 ou superior e deve
 proporcionar uma interface amigável para o usuário realizar as operações
 de:  
 - [x] Cadastro: Inserir novos registros de pessoas.
-- [ ] Alteração: Atualizar informações de registros existentes.
+- [x] Alteração: Atualizar informações de registros existentes.
 - [x] Remoção: Excluir registros de pessoas.
 - [ ] Consulta: Buscar registros de pessoas.
 
@@ -45,8 +45,7 @@ repositório público no GitHub ou GitLab.
 - [x] Utilizar CQRS(Comand Query Responsability Segregation) com MediatR(mediador).
 - [ ] Versão da API: Criar uma versão 2 da API que inclua o endereço da pessoa como dado obrigatório. A versão 1 deve continuar funcional.
 - [ ] Autenticação: Implementar autenticação via JSON Web Token
-- [ ] (JWT) para acesso à aplicação, permitindo apenas usuários pré-
-existentes.
+- [ ] (JWT) para acesso à aplicação, permitindo apenas usuários pré-existentes.
 
 - [ ] Testes Automatizados: Implementar testes automatizados com XUnit, garantindo pelo menos 80% de cobertura de código no back- end.
 - [ ] Deploy em Nuvem: A aplicação deve estar rodando em um ambiente
