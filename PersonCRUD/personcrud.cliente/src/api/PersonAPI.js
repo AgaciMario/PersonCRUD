@@ -31,8 +31,8 @@ export async function DeletePerson(id) {
     return true;
 }
 
-export async function updatePerson(cpf, personData) {
-    const response = await fetch(`${API_BASE}/${cpf}`, {
+export async function UpdatePerson(id, personData) {
+    const response = await fetch(`${API_BASE}/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

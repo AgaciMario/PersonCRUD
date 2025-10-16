@@ -1,12 +1,13 @@
-﻿import { useForm } from 'react-hook-form'
-import { useState, useEffect } from 'react'
-import { CreatePerson } from '../api/PersonAPI'
+﻿import { useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { UpdatePerson } from '../api/PersonAPI'
 
 function EditPersonModal({ person }) {
-
+    // TODO: Da forma que esta implementada as alterações a person permanecem salvas mesmo apos fechar o modal isso deve ser corrigido
     const { register, handleSubmit, formState: { errors }, setValue } = useForm()
     const birthDate = new Date(person.birthDate)
-    
+    const btnDismissModalRef = useRef(null);
+
     setValue("Name", person.name)
     setValue("Sex", person.sex)
     setValue("Email", person.email)
@@ -17,9 +18,13 @@ function EditPersonModal({ person }) {
 
     const formId = "editForm"
 
-    const onSubmit = (data) => {
-        //CreatePerson(data)
-        console.log(data)
+    const onSubmit = async (data) => {
+        try {
+            await UpdatePerson(person.id, data)
+            btnDismissModalRef.current.click() //Hack para fechar o modal
+        } catch (error) {
+            console.error("Erro ao atulizar pessoa:", error);
+        }
     }
 
     return (
@@ -81,8 +86,8 @@ function EditPersonModal({ person }) {
 
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" className="btn btn-primary">Salvar</button>
+                            <button ref={btnDismissModalRef} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button form={formId} type="submit" className="btn btn-primary">Salvar</button>
                         </div>
                     </div>
                 </div>
