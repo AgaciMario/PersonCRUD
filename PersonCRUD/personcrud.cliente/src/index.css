@@ -11,3 +11,22 @@
     padding: 1.5rem 2rem;
     margin-bottom: 1.5rem;
 }
+
+.btn-icon {
+    border: none;
+    background: none;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.1rem;
+}
+
+.btn-icon.edit {
+    color: #0d6efd;
+}
+
+.btn-icon.delete {
+    color: #dc3545;
+}
+
+.btn-icon:hover {
+    opacity: 0.7;
+}
