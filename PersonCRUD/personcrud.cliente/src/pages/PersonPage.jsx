@@ -6,6 +6,7 @@
 import Header from '../component/Header/Header'
 import ActionBar from '../component/ActionBars/ActionBar'
 import PersonTable from '../component/Table/PersonTable'
+import Footer from '../component/Footer/Footer'
 
 function PersonPage() {
     return (
@@ -13,6 +14,7 @@ function PersonPage() {
             <Header />
             <ActionBar />
             <PersonTable />
+            <Footer />
         </div>
     )
 }
