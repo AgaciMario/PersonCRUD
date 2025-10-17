@@ -5,7 +5,7 @@ using PersonCRUD.Domain.Entities;
 
 namespace PersonCRUD.Application.Querys.GetPersonPaginatedQuery
 {
-    public class GetPersonPaginatedHandler : IRequestHandler<GetPersonPaginatedQuery, List<PersonDTO>>
+    public class GetPersonPaginatedHandler : IRequestHandler<GetPersonPaginatedQuery, GetPersonPaginatedDTO>
     {
 		readonly IPersonRepository PersonRepository;
 
@@ -14,16 +14,16 @@ namespace PersonCRUD.Application.Querys.GetPersonPaginatedQuery
             PersonRepository = personRepository;
         }
 
-        public async Task<List<PersonDTO>> Handle(GetPersonPaginatedQuery request, CancellationToken ct)
+        public async Task<GetPersonPaginatedDTO> Handle(GetPersonPaginatedQuery request, CancellationToken ct)
         {
             try
             {
-                List<Person> personList = await PersonRepository.GetPersonPaginated(request.CurrentPage, request.PageSize, ct);
+                (List<Person> rawData, int totalCount) = await PersonRepository.GetPersonPaginated(request.CurrentPage, request.PageSize, request.NameFilter, ct);
 
-                List<PersonDTO> personDTOList = new List<PersonDTO>();
-                foreach (Person person in personList)
+                List<PersonDTO> finalData = new List<PersonDTO>();
+                foreach (Person person in rawData)
                 {
-                    personDTOList.Add(new PersonDTO()
+                    finalData.Add(new PersonDTO()
                     {
                         Id = person.Id.Value,
                         Name = person.Name,
@@ -38,7 +38,9 @@ namespace PersonCRUD.Application.Querys.GetPersonPaginatedQuery
                     });
                 }
 
-                return personDTOList;
+                GetPersonPaginatedDTO response = new GetPersonPaginatedDTO(totalCount, request.PageSize, request.CurrentPage, finalData);
+
+                return response;
             }
             catch (Exception)
 			{
