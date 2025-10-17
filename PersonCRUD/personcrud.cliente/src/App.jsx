@@ -1,18 +1,19 @@
-﻿import React, { useEffect, useState } from "react"
+﻿//import React, { useEffect, useState } from "react"
 import { getPersonPaginated } from '../src/api/PersonAPI'
-import PersonTable from './component/PersonTable.jsx'
-import PersonModal from './component/PersonModal.jsx'
-import DeleteModal from './component/DeleteModal.jsx'
-import EditPersonModal from './component/EditPersonModal.jsx'
+//import PersonTable from './component/PersonTable.jsx'
+//import PersonModal from './component/PersonModal.jsx'
+//import DeleteModal from './component/DeleteModal.jsx'
+//import EditPersonModal from './component/EditPersonModal.jsx'
+import PersonPage from './pages/PersonPage.jsx'
 
-function App() {
+/* function App2() {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     let [data, setData] = useState([]);
 
     let [personToDelete, setPersonToDelete] = useState({}); //TODO: encontrar um nome melhor para esta variável.
     let [personToEdit, setPersonToEdit] = useState({
-        "name": "", 
+        "name": "",
         "sex": "",
         "email": "",
         "birthDate": "",
@@ -67,6 +68,12 @@ function App() {
             </nav>
         </div>
     );
+} */
+
+function App() {
+    return (
+        <PersonPage></PersonPage>
+    )
 }
 
 async function GetPersonData(currentPage = 1, pageSize = 10, setData) {
