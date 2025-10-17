@@ -25,25 +25,26 @@ namespace PersonCRUD.Server.Controllers
         /// </summary>
         /// <param name="pageSize">Number of records per page</param>
         /// <param name="currentPage">Page index starting from 1</param>
+        /// <param name="nameFilter">Optinal: filter by person name</param>
         /// <returns>A list of persons in the specified page</returns>
         /// <remarks>
         /// Sample request:
         ///
-        ///     GET /Person?currentPage={currentPage}&amp;pageSize={pageSize}
+        ///     GET /Person?currentPage={currentPage}&amp;pageSize={pageSize}&amp;nameFilter={nameFilter}
         ///
         /// </remarks>
-        /// <response code="200">A list of persons in the specified page</response>
+        /// <response code="200">Returns the pagination details and a data object with the list of queried persons</response>
         /// <response code="400">If some query parameter is invalid</response>
         /// <response code="500">If some server side error occur</response>
         [HttpGet(Name = "GetAllPerson")]
-        [ProducesResponseType(typeof(List<PersonDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GetPersonPaginatedDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> GetPaginated([FromQuery] int currentPage, [FromQuery] int pageSize, CancellationToken ct = default)
+        public async Task<ActionResult> GetPaginated([FromQuery] int currentPage, [FromQuery] int pageSize, [FromQuery] string? nameFilter, CancellationToken ct = default)
         {
-            GetPersonPaginatedQuery command = new GetPersonPaginatedQuery(currentPage, pageSize);
-            List<PersonDTO> dto = await Mediator.Send(command, ct);
-            return Ok(dto);
+            GetPersonPaginatedQuery command = new GetPersonPaginatedQuery(currentPage, pageSize, nameFilter);
+            GetPersonPaginatedDTO response = await Mediator.Send(command, ct);
+            return Ok(response);
         }
 
         /// <summary>

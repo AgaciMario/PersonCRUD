@@ -1,5 +1,6 @@
 ﻿namespace PersonCRUD.Application.DTOs
 {
+    // TODO: Explorar a ideia de tornar este DTO não modificavel, assim protegendo os dados internos de uma possível alteração.
     public class PersonDTO
     {
         public long Id { get; set; }

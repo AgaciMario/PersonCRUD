@@ -45,11 +45,24 @@ namespace PersonCRUD.Infra.Repository
             return person;
         }
 
-        public async Task<List<Person>> GetPersonPaginated(int currentPage, int pageSize, CancellationToken ct) => await PersonDbContext.Person
-            .AsNoTracking()
-            .Where(person => person.DeletedAt == null)
-            .Skip((currentPage - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync(ct);
+        public async Task<(List<Person> data, int totalCount)> GetPersonPaginated(int currentPage, int pageSize, string? nameFilter, CancellationToken ct)
+        {
+            IQueryable<Person> query = PersonDbContext.Person;
+
+            if (!string.IsNullOrEmpty(nameFilter))
+                query = query.Where(person => person.Name.Contains(nameFilter));
+
+            int totalCount = await query.CountAsync(ct);
+
+            List<Person> personData = await query
+                .AsNoTracking()
+                .Where(person => person.DeletedAt == null)
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync(ct);
+
+            //TODO: Estudar uma forma de criar um entidade para servir como wrapper para essas propriedades, evitando assim o uso de tuplas.
+            return (personData, totalCount);
+        }
     }
 }
