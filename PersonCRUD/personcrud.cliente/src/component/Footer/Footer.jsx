@@ -2,7 +2,7 @@
 
 function Footer() {
     return (
-        <footer className="section">
+        <footer>
             <div>Mostrando 1–10 de 50 registros</div>
             <ul className="pagination pagination-sm mb-0">
                 <li className="page-item active"><a className="page-link" href="#">1</a></li>

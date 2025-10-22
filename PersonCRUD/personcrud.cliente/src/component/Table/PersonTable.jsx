@@ -4,7 +4,7 @@ import './Table.css'
 
 function PersonTable() {
     return (
-        <div className="section table-container">
+        <div className="table-container">
             <table className="table table-hover align-middle">
                 <thead>
                     <TableHeader />
