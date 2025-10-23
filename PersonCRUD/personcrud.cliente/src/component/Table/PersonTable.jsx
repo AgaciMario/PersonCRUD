@@ -2,7 +2,7 @@
 import TableRow from './TableRow'
 import './Table.css'
 
-function PersonTable() {
+function PersonTable({ data, editHanlder, deleteHandler, viewHanlder }) {
     return (
         <div className="table-container">
             <table className="table table-hover align-middle">
@@ -10,10 +10,18 @@ function PersonTable() {
                     <TableHeader />
                 </thead>
                 <tbody>
-                    {/*TODO: table row representa apenas uma linha devemos adicionar um for loop para os dados 
-                      recebidos aqui e para cada um realizar a criação de um row*/}
-
-                    <TableRow />
+                    {
+                        // TODO: verificar comportamento estranho onde o component é chamado duas vezes para cada elemento do array.
+                        data.map(person =>
+                            <TableRow
+                                key={person.id}
+                                person={person}
+                                editHandler={editHanlder}
+                                deleteHandler={deleteHandler}
+                                viewHanlder={viewHanlder}
+                            />
+                        )
+                    }
                 </tbody>
             </table>
         </div>
