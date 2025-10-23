@@ -10,7 +10,6 @@ function Footer() {
     const totalPage = Math.ceil(totalCount / pageSize);
     const pagesList = []
 
-
     for (let i = 1; i <= totalPage; i++) {
         pagesList.push(
             <li onClick={(e) => setcurrentPage(e.target.attributes[0].value)}
@@ -28,9 +27,17 @@ function Footer() {
         <footer>
             <div> {`Mostrando ${findex}–${(lindex <= totalCount) ? lindex : totalCount} de ${totalCount} registros`} </div>
             <ul className="pagination pagination-sm mb-0">
-                <li key={"previous"} className="page-item"><a className="page-link" href="#">&laquo;</a></li>
+                <li onClick={() => (currentPage > 1) ? setcurrentPage(currentPage - 1) : setcurrentPage(currentPage)}
+                    key={"previous"}
+                    className="page-item">
+                    <a className="page-link" href="#">&laquo;</a>
+                </li>
                 {pagesList}
-                <li key={"next"} className="page-item"><a className="page-link" href="#">&raquo;</a></li>
+                <li
+                    onClick={() => (currentPage < totalPage) ? setcurrentPage(currentPage + 1) : setcurrentPage(currentPage)}
+                    key={"next"} className="page-item">
+                    <a className="page-link" href="#">&raquo;</a>
+                </li>
             </ul>
         </footer>
     )
