@@ -1,12 +1,6 @@
-﻿import { useState } from 'react'
-import './Footer.css'
+﻿import './Footer.css'
 
-function Footer() {
-
-    const totalCount = 50;
-    const pageSize = 10;
-    const [currentPage, setcurrentPage] = useState(1);
-
+function Footer({ totalCount, pageSize, currentPage, setcurrentPage }) {
     const totalPage = Math.ceil(totalCount / pageSize);
     const pagesList = []
 

@@ -23,6 +23,10 @@ function PersonPage() {
         //{id:10, name:"Roberto Dias", email:"roberto.dias@email.com", phone:"(62) 97777-8888"}
     ];
 
+    const totalCount = 50;
+    const pageSize = 10;
+    const [currentPage, setcurrentPage] = useState(1);
+
     return (
         <div className="container py-4">
             <div className="section">
@@ -48,7 +52,12 @@ function PersonPage() {
             </div>
 
             <div className="section">
-                <Footer />
+                <Footer
+                    totalCount={totalCount}
+                    pageSize={pageSize}
+                    currentPage={currentPage}
+                    setcurrentPage={setcurrentPage}
+                />
             </div>
         </div>
     )
