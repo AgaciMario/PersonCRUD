@@ -10,10 +10,14 @@ function Footer() {
     const totalPage = Math.ceil(totalCount / pageSize);
     const pagesList = []
 
+
     for (let i = 1; i <= totalPage; i++) {
-        pagesList.push((i == currentPage)
-            ? <li onClick={(i) => setcurrentPage(i)} key={i} className="page-item active"><a className="page-link" href="#">{i}</a></li>
-            : <li onClick={(i) => setcurrentPage(i)} key={i} className="page-item"><a className="page-link" href="#">{i}</a></li>
+        pagesList.push(
+            <li onClick={(e) => setcurrentPage(e.target.attributes[0].value)}
+                key={i}
+                className={(i == currentPage) ? "page-item active" : "page-item"}>
+                <a data-index={i} className="page-link" href="#">{i}</a>
+            </li>
         );
     }
 
