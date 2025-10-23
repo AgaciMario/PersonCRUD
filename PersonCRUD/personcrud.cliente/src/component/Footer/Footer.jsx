@@ -1,15 +1,32 @@
-﻿import './Footer.css'
+﻿import { useState } from 'react'
+import './Footer.css'
 
 function Footer() {
+
+    const totalCount = 50;
+    const pageSize = 10;
+    const [currentPage, setcurrentPage] = useState(1);
+
+    const totalPage = Math.ceil(totalCount / pageSize);
+    const pagesList = []
+
+    for (let i = 1; i <= totalPage; i++) {
+        pagesList.push((i == currentPage)
+            ? <li onClick={(i) => setcurrentPage(i)} key={i} className="page-item active"><a className="page-link" href="#">{i}</a></li>
+            : <li onClick={(i) => setcurrentPage(i)} key={i} className="page-item"><a className="page-link" href="#">{i}</a></li>
+        );
+    }
+
+    const lindex = currentPage * pageSize
+    const findex = ((currentPage - 1) * pageSize) + 1
+
     return (
         <footer>
-            <div>Mostrando 1–10 de 50 registros</div>
+            <div> {`Mostrando ${findex}–${(lindex <= totalCount) ? lindex : totalCount} de ${totalCount} registros`} </div>
             <ul className="pagination pagination-sm mb-0">
-                <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item"><a className="page-link" href="#">4</a></li>
-                <li className="page-item"><a className="page-link" href="#">&raquo;</a></li>
+                <li key={"previous"} className="page-item"><a className="page-link" href="#">&laquo;</a></li>
+                {pagesList}
+                <li key={"next"} className="page-item"><a className="page-link" href="#">&raquo;</a></li>
             </ul>
         </footer>
     )

@@ -11,7 +11,7 @@ function PersonTable({ data, editHanlder, deleteHandler, viewHanlder }) {
                 </thead>
                 <tbody>
                     {
-                        // TODO: verificar comportamento estranho onde o component é chamado duas vezes para cada elemento do array.
+                        // TODO: Verificar comportamento estranho onde o component é chamado duas vezes para cada elemento do array.
                         data.map(person =>
                             <TableRow
                                 key={person.id}
