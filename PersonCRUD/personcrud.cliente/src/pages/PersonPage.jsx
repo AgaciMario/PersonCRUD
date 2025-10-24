@@ -10,12 +10,12 @@ import { fetchPaginatedPerson } from '../repository/PersonRepository'
 import { useState, useEffect } from 'react'
 
 function PersonPage() {
-    // States:
+     // States:
     const [searchTxt, setSearchTxt] = useState("")
     const [data, setdata] = useState([])
 
     const [totalCount, settotalCount] = useState(0)
-    const [pageSize, setpageSize]= useState(5)
+    const [pageSize, setpageSize] = useState(5)
     const [currentPage, setcurrentPage] = useState(1)
 
     const fetchPersons = () => {
@@ -30,6 +30,7 @@ function PersonPage() {
             .catch(err => console.log(err))
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => { fetchPersons() }, [pageSize, currentPage]);
 
     return (
@@ -60,6 +61,7 @@ function PersonPage() {
                 <Footer
                     totalCount={totalCount}
                     pageSize={pageSize}
+                    setpageSize={setpageSize}
                     currentPage={currentPage}
                     setcurrentPage={setcurrentPage}
                 />

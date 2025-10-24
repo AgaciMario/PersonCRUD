@@ -1,6 +1,6 @@
 ﻿import './Footer.css'
 
-function Footer({ totalCount, pageSize, currentPage, setcurrentPage }) {
+function Footer({ totalCount, pageSize, setpageSize, currentPage, setcurrentPage }) {
     const totalPage = Math.ceil(totalCount / pageSize);
     const pagesList = []
 
@@ -19,6 +19,13 @@ function Footer({ totalCount, pageSize, currentPage, setcurrentPage }) {
 
     return (
         <footer>
+            <div>
+                <select onChange={(e) => setpageSize(e.target.value)} defaultValue="5" className="form-select form-select-sm" aria-label="Small page size selector">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                </select>
+            </div>
             <div> {`Mostrando ${findex}–${(lindex <= totalCount) ? lindex : totalCount} de ${totalCount} registros`} </div>
             <ul className="pagination pagination-sm mb-0">
                 <li onClick={() => (currentPage > 1) ? setcurrentPage(currentPage - 1) : setcurrentPage(currentPage)}
