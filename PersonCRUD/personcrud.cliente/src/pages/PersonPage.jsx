@@ -15,11 +15,11 @@ function PersonPage() {
     const [data, setdata] = useState([])
 
     const [totalCount, settotalCount] = useState(0)
-    const [pageSize, setpageSize]= useState(10)
+    const [pageSize, setpageSize]= useState(5)
     const [currentPage, setcurrentPage] = useState(1)
 
-    useEffect(() => {
-        fetchPaginatedPerson(currentPage, pageSize)
+    const fetchPersons = () => {
+        fetchPaginatedPerson(currentPage, pageSize, searchTxt)
             .then(response => {
                 setdata(response.data)
                 setcurrentPage(response.currentPage)
@@ -28,8 +28,9 @@ function PersonPage() {
                 console.log(response)
             })
             .catch(err => console.log(err))
-    }, [pageSize, currentPage]);
-    
+    }
+
+    useEffect(() => { fetchPersons() }, [pageSize, currentPage]);
 
     return (
         <div className="container py-4">
@@ -41,7 +42,7 @@ function PersonPage() {
                 <ActionBar
                     searchTxt={searchTxt}
                     setSearchTxt={setSearchTxt}
-                    searchHandler={(param) => console.log(param)}
+                    searchHandler={fetchPersons}
                     registerPersonHandler={() => alert("Abrir formulário de cadastro de pessoas!") }
                 /> 
             </div>

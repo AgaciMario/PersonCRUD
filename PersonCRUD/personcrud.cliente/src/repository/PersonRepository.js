@@ -20,10 +20,11 @@ export async function getPersonPaginated(page, pageSize) {
     return await response.json();
 }
 
-export async function fetchPaginatedPerson(currentPage, pageSize) {
+export async function fetchPaginatedPerson(currentPage, pageSize, nameFilter = null) {
     const url = new URL(URL_PERSON);
     url.searchParams.append("currentPage", currentPage);
     url.searchParams.append("pageSize", pageSize);
+    url.searchParams.append("nameFilter", nameFilter);
 
     return fetch(url, { method: "GET", headers: { "Content-Type": "application/json" }})
         .then(async (response) => {

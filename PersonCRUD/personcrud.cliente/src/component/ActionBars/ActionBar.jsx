@@ -11,9 +11,9 @@ function ActionBar({ searchTxt, setSearchTxt, searchHandler, registerPersonHandl
                     onChange={(e) => setSearchTxt(e.target.value)}
                     type="text"
                     className="form-control"
-                    placeholder="Pesquisar pessoa..."
+                    placeholder="Pesquisar nome..."
                 />
-                <button onClick={() => searchHandler(searchTxt)} className="btn btn-primary"><i className="bi bi-search me-1"></i>Buscar</button>
+                <button onClick={() => searchHandler()} className="btn btn-primary"><i className="bi bi-search me-1"></i>Buscar</button>
             </div>
             <button onClick={() => registerPersonHandler(searchTxt)}  className="btn btn-success"><i className="bi bi-person-plus-fill me-1"></i>Cadastrar Pessoa</button>
         </div>
