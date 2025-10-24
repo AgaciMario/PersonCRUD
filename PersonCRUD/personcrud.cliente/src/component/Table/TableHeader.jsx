@@ -5,7 +5,7 @@ function TableHeader() {
             <th>#</th>
             <th>Nome</th>
             <th>Email</th>
-            <th>Telefone</th>
+            <th>CPF</th>
             <th className="text-center">Ações</th>
         </tr>
     )
