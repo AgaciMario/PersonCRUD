@@ -1,4 +1,6 @@
-﻿import './Footer.css'
+﻿// TODO: possivelmente renomear para pagination, já que footer tem o significa roda-pé
+
+import './Footer.css'
 
 function Footer({ totalCount, pageSize, setpageSize, currentPage, setcurrentPage }) {
     const totalPage = Math.ceil(totalCount / pageSize);

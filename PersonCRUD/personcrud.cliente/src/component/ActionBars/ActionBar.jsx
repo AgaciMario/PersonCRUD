@@ -1,6 +1,6 @@
 ﻿import './ActionBars.css'
 
-function ActionBar({ searchTxt, setSearchTxt, searchHandler, registerPersonHandler }) {
+function ActionBar({ searchTxt, setSearchTxt, searchHandler, data_bs_target_edit }) {
     // TODO: Adicionar React Hook forms para validar se os caracteres do input de pesquisa são validos.
     return (
         <div className="actions-bar d-flex flex-wrap justify-content-between align-items-center gap-3">
@@ -15,7 +15,7 @@ function ActionBar({ searchTxt, setSearchTxt, searchHandler, registerPersonHandl
                 />
                 <button onClick={() => searchHandler()} className="btn btn-primary"><i className="bi bi-search me-1"></i>Buscar</button>
             </div>
-            <button onClick={() => registerPersonHandler(searchTxt)}  className="btn btn-success"><i className="bi bi-person-plus-fill me-1"></i>Cadastrar Pessoa</button>
+            <button data-bs-toggle="modal" data-bs-target={`#${data_bs_target_edit}`} className="btn btn-success"><i className="bi bi-person-plus-fill me-1"></i>Cadastrar Pessoa</button>
         </div>
     )
 }

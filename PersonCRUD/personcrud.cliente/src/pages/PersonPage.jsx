@@ -6,6 +6,7 @@ import Header from '../component/Header/Header'
 import ActionBar from '../component/ActionBars/ActionBar'
 import PersonTable from '../component/Table/PersonTable'
 import Footer from '../component/Footer/Footer'
+import EditModal from '../component/Modals/EditModal'
 import { fetchPaginatedPerson } from '../repository/PersonRepository'
 import { useState, useEffect } from 'react'
 
@@ -17,6 +18,9 @@ function PersonPage() {
     const [totalCount, settotalCount] = useState(0)
     const [pageSize, setpageSize] = useState(5)
     const [currentPage, setcurrentPage] = useState(1)
+
+    // Modal Identifiers
+    const data_bs_target_edit = "EditModal"
 
     const fetchPersons = () => {
         fetchPaginatedPerson(currentPage, pageSize, searchTxt)
@@ -35,6 +39,7 @@ function PersonPage() {
 
     return (
         <div className="container py-4">
+            <EditModal data_bs_target_edit={data_bs_target_edit} />
             <div className="section">
                 <Header />
             </div>
@@ -44,7 +49,7 @@ function PersonPage() {
                     searchTxt={searchTxt}
                     setSearchTxt={setSearchTxt}
                     searchHandler={fetchPersons}
-                    registerPersonHandler={() => alert("Abrir formulário de cadastro de pessoas!") }
+                    data_bs_target_edit={data_bs_target_edit}
                 /> 
             </div>
 
