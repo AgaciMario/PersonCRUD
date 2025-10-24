@@ -1,7 +1,8 @@
-﻿const API_BASE = "http://localhost:5194/Person"; 
+﻿import config from "../config/index"
+const URL_PERSON = `${config.URL_BACKEND}/Person`; 
 
 export async function getPersonPaginated(page, pageSize) {
-    const url = new URL(API_BASE);
+    const url = new URL(URL_PERSON);
     url.searchParams.append("currentPage", page);
     url.searchParams.append("pageSize", pageSize);
 
@@ -19,8 +20,25 @@ export async function getPersonPaginated(page, pageSize) {
     return await response.json();
 }
 
+export async function fetchPaginatedPerson(currentPage, pageSize) {
+    const url = new URL(URL_PERSON);
+    url.searchParams.append("currentPage", currentPage);
+    url.searchParams.append("pageSize", pageSize);
+
+    return fetch(url, { method: "GET", headers: { "Content-Type": "application/json" }})
+        .then(async (response) => {
+            const data = await response.json()
+            if (!response.ok) throw new Error(data.Error)
+            return data
+        })
+        .catch(async (err) => {
+            // TODO: adicionar logger
+            throw new Error(err.message)
+        });
+}
+
 export async function DeletePerson(id) {
-    const response = await fetch(`${API_BASE}/${id}`, {
+    const response = await fetch(`${URL_PERSON}/${id}`, {
         method: "DELETE",
     });
 
@@ -32,7 +50,7 @@ export async function DeletePerson(id) {
 }
 
 export async function UpdatePerson(id, personData) {
-    const response = await fetch(`${API_BASE}/${id}`, {
+    const response = await fetch(`${URL_PERSON}/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -48,7 +66,7 @@ export async function UpdatePerson(id, personData) {
 }
 
 export async function CreatePerson(personData) {
-    const response = await fetch(`${API_BASE}/`, {
+    const response = await fetch(`${URL_PERSON}/`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

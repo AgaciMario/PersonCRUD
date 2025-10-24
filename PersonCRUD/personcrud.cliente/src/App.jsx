@@ -1,5 +1,5 @@
 ﻿//import React, { useEffect, useState } from "react"
-import { getPersonPaginated } from '../src/api/PersonAPI'
+//import { getPersonPaginated } from '../src/api/PersonAPI'
 //import PersonTable from './component/PersonTable.jsx'
 //import PersonModal from './component/PersonModal.jsx'
 //import DeleteModal from './component/DeleteModal.jsx'
@@ -76,13 +76,13 @@ function App() {
     )
 }
 
-async function GetPersonData(currentPage = 1, pageSize = 10, setData) {
-    try {
-        const response = await getPersonPaginated(currentPage, pageSize)
-        setData(response);
-    } catch (error) {
-        console.error("Erro ao carregar pessoas:", error);
-    }
-}
+//async function GetPersonData(currentPage = 1, pageSize = 10, setData) {
+//    try {
+//        const response = await getPersonPaginated(currentPage, pageSize)
+//        setData(response);
+//    } catch (error) {
+//        console.error("Erro ao carregar pessoas:", error);
+//    }
+//}
 
 export default App

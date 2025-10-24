@@ -6,6 +6,7 @@ import ActionBar from '../component/ActionBars/ActionBar'
 import PersonTable from '../component/Table/PersonTable'
 import Footer from '../component/Footer/Footer'
 import { useState } from 'react'
+import { fetchPaginatedPerson } from '../repository/PersonRepository'
 
 function PersonPage() {
     // States:
@@ -26,6 +27,8 @@ function PersonPage() {
     const totalCount = 50;
     const pageSize = 10;
     const [currentPage, setcurrentPage] = useState(1);
+
+    fetchPaginatedPerson(currentPage, pageSize).then(response => console.log(response)).catch(err => console.error(err))
 
     return (
         <div className="container py-4">
