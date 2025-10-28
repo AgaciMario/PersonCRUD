@@ -9,6 +9,8 @@ import Footer from '../component/Footer/Footer'
 import EditModal from '../component/Modals/EditModal'
 import { fetchPaginatedPerson } from '../repository/PersonRepository'
 import { useState, useEffect } from 'react'
+import Toast from 'react-bootstrap/Toast'
+import ToastContainer from 'react-bootstrap/ToastContainer'
 
 function PersonPage() {
      // States:
@@ -45,6 +47,7 @@ function PersonPage() {
                 show={show}
                 handleClose={handleClose}
                 handleShow={handleShow}
+                fetchPersons={fetchPersons}
             />
             <div className="section">
                 <Header />
@@ -77,6 +80,39 @@ function PersonPage() {
                     setcurrentPage={setcurrentPage}
                 />
             </div>
+
+            {/*const toast = [{*/}
+            {/*    type: success,*/}
+            {/*    title: "Notifiação"*/}
+            {/*    body: "Cadastro realizado com sucesso!"*/}
+            {/*}]*/}
+
+            <ToastContainer className="p-3" position="top-end" style={{ zIndex: 999 }}>
+                <Toast bg="success">
+                    <Toast.Header>
+                        <i className="bi bi-people-fill me-2"></i>&nbsp;
+                        <strong className="me-auto">Notificação</strong>
+                        <small>11 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body className="text-white">Cadastro realizado com sucesso!</Toast.Body>
+                </Toast>
+                <Toast bg="warning">
+                    <Toast.Header>
+                        <i class="bi bi-exclamation-lg"></i>&nbsp;
+                        <strong className="me-auto">Aviso</strong>
+                        <small>11 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body>Já existe uma pessoa cadastrada com esse CPF!</Toast.Body>
+                </Toast>
+                <Toast bg="danger">
+                    <Toast.Header>
+                        <i class="bi bi-bug-fill"></i>&nbsp;
+                        <strong className="me-auto">Erro</strong>
+                        <small>11 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body className="text-white" >Houve um erro interno no sistema, tente novamente mais tarde</Toast.Body>
+                </Toast>
+            </ToastContainer>
         </div>
     )
 }

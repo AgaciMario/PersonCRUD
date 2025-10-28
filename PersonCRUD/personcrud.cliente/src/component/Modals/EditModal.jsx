@@ -3,12 +3,13 @@ import Modal from 'react-bootstrap/Modal'
 import { useForm } from 'react-hook-form'
 import { CreatePerson } from '../../repository/PersonRepository'
 
-function EditModal({ show, handleClose }) {
+function EditModal({ show, handleClose, fetchPersons }) {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = async (data) => {
         await CreatePerson(data)
             .then((response) => {
                 handleClose()
+                fetchPersons()
                 console.log("person registered: " + response)
             })
             .catch((err) => console.log(err))
