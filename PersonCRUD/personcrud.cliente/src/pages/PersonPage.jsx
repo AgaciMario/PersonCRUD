@@ -9,11 +9,10 @@ import Footer from '../component/Footer/Footer'
 import EditModal from '../component/Modals/EditModal'
 import { fetchPaginatedPerson } from '../repository/PersonRepository'
 import { useState, useEffect } from 'react'
-import Toast from 'react-bootstrap/Toast'
-import ToastContainer from 'react-bootstrap/ToastContainer'
+import ToastContainer from '../component/Toasts/ToastContainer'
 
 function PersonPage() {
-     // States:
+    // States:
     const [searchTxt, setSearchTxt] = useState("")
     const [data, setdata] = useState([])
 
@@ -26,8 +25,19 @@ function PersonPage() {
     const handleClose = () => setshow(false)
     const handleShow = () => setshow(true)
 
+    // Notification state
+    // toastData exemple:
+    //{ 
+    //    type: "success",
+    //    title: "Notificação",
+    //    body: "Cadastro realizado com sucesso!",
+    //    icon: "bi-people-fill"
+    //}    
+    const [notificationQueue, setnotificationQueue] = useState([])
+    const appendNotification = (toastData) => setnotificationQueue([...notificationQueue, toastData])
+
     const fetchPersons = () => {
-        fetchPaginatedPerson(currentPage, pageSize, searchTxt)
+        fetchPaginatedPerson(currentPage, pageSize, searchTxt) // TODO: teste a adiçao do await
             .then(response => {
                 setdata(response.data)
                 setcurrentPage(response.currentPage)
@@ -81,38 +91,7 @@ function PersonPage() {
                 />
             </div>
 
-            {/*const toast = [{*/}
-            {/*    type: success,*/}
-            {/*    title: "Notifiação"*/}
-            {/*    body: "Cadastro realizado com sucesso!"*/}
-            {/*}]*/}
-
-            <ToastContainer className="p-3" position="top-end" style={{ zIndex: 999 }}>
-                <Toast bg="success">
-                    <Toast.Header>
-                        <i className="bi bi-people-fill me-2"></i>&nbsp;
-                        <strong className="me-auto">Notificação</strong>
-                        <small>11 mins ago</small>
-                    </Toast.Header>
-                    <Toast.Body className="text-white">Cadastro realizado com sucesso!</Toast.Body>
-                </Toast>
-                <Toast bg="warning">
-                    <Toast.Header>
-                        <i class="bi bi-exclamation-lg"></i>&nbsp;
-                        <strong className="me-auto">Aviso</strong>
-                        <small>11 mins ago</small>
-                    </Toast.Header>
-                    <Toast.Body>Já existe uma pessoa cadastrada com esse CPF!</Toast.Body>
-                </Toast>
-                <Toast bg="danger">
-                    <Toast.Header>
-                        <i class="bi bi-bug-fill"></i>&nbsp;
-                        <strong className="me-auto">Erro</strong>
-                        <small>11 mins ago</small>
-                    </Toast.Header>
-                    <Toast.Body className="text-white" >Houve um erro interno no sistema, tente novamente mais tarde</Toast.Body>
-                </Toast>
-            </ToastContainer>
+            <ToastContainer notificationQueue={notificationQueue} />
         </div>
     )
 }
