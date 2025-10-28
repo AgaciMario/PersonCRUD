@@ -1,32 +1,26 @@
 ﻿import config from "../config/index"
 const URL_PERSON = `${config.URL_BACKEND}/Person`; 
 
-export async function getPersonPaginated(page, pageSize) {
-    const url = new URL(URL_PERSON);
-    url.searchParams.append("currentPage", page);
-    url.searchParams.append("pageSize", pageSize);
-
-    const response = await fetch(url, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error("Erro while feching persons");
-    }
-
-    return await response.json();
-}
-
 export async function fetchPaginatedPerson(currentPage, pageSize, nameFilter = null) {
     const url = new URL(URL_PERSON);
     url.searchParams.append("currentPage", currentPage);
     url.searchParams.append("pageSize", pageSize);
     url.searchParams.append("nameFilter", nameFilter);
 
-    return fetch(url, { method: "GET", headers: { "Content-Type": "application/json" }})
+    return await fetch(url, { method: "GET", headers: { "Content-Type": "application/json" }})
+        .then(async (response) => {
+            const data = await response.json()
+            if (!response.ok) throw new Error(data.Error)
+            return data
+        })
+        .catch(async (err) => {
+            // TODO: adicionar logger
+            throw new Error(err.message)
+        });
+}
+
+export async function CreatePerson(personData) {
+    return await fetch(URL_PERSON, { method: "POST", headers: { "content-Type": "application/json" }, body: JSON.stringify(personData) })
         .then(async (response) => {
             const data = await response.json()
             if (!response.ok) throw new Error(data.Error)
@@ -61,22 +55,6 @@ export async function UpdatePerson(id, personData) {
 
     if (!response.ok) {
         throw new Error("Erro ao atualizar pessoa");
-    }
-
-    return await response.json();
-}
-
-export async function CreatePerson(personData) {
-    const response = await fetch(`${URL_PERSON}/`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(personData),
-    });
-
-    if (!response.ok) {
-        throw new Error("Erro ao criar pessoa");
     }
 
     return await response.json();

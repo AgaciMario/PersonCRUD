@@ -19,8 +19,10 @@ function PersonPage() {
     const [pageSize, setpageSize] = useState(5)
     const [currentPage, setcurrentPage] = useState(1)
 
-    // Modal Identifiers
-    const data_bs_target_edit = "EditModal"
+    // Modal state
+    const [show, setshow] = useState(false)
+    const handleClose = () => setshow(false)
+    const handleShow = () => setshow(true)
 
     const fetchPersons = () => {
         fetchPaginatedPerson(currentPage, pageSize, searchTxt)
@@ -31,7 +33,7 @@ function PersonPage() {
                 settotalCount(response.totalCount)
                 console.log(response)
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err)) // Adicionar tosty para apresentar o erro na tela.
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,7 +41,11 @@ function PersonPage() {
 
     return (
         <div className="container py-4">
-            <EditModal data_bs_target_edit={data_bs_target_edit} />
+            <EditModal
+                show={show}
+                handleClose={handleClose}
+                handleShow={handleShow}
+            />
             <div className="section">
                 <Header />
             </div>
@@ -49,7 +55,7 @@ function PersonPage() {
                     searchTxt={searchTxt}
                     setSearchTxt={setSearchTxt}
                     searchHandler={fetchPersons}
-                    data_bs_target_edit={data_bs_target_edit}
+                    handleShow={handleShow}
                 /> 
             </div>
 
