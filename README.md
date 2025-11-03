@@ -1,4 +1,4 @@
-## Objetivo
+﻿## Objetivo
 
 Criar uma aplicação para o cadastro de pessoas, composta por um back-end em
 .NET e um front-end em React. A aplicação deve seguir as especificações abaixo:
@@ -30,7 +30,7 @@ de:
 - [x] Cadastro: Inserir novos registros de pessoas.
 - [x] Alteração: Atualizar informações de registros existentes.
 - [x] Remoção: Excluir registros de pessoas.
-- [ ] Consulta: Buscar registros de pessoas.
+- [x] Consulta: Buscar registros de pessoas.
 
 ### Desejavel
 - [x] Utilizar formulário reativo react-hook-form
