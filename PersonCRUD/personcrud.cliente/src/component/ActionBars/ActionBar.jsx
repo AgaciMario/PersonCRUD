@@ -9,16 +9,16 @@ function ActionBar({ searchTxt, setSearchTxt, searchHandler, handleShow }) {
                 <span className="input-group-text bg-white"><i className="bi bi-search"></i></span>
                 <input
                     value={searchTxt}
-                    onChange={(e) => setSearchTxt(e.target.value)}
+                    onChange={ (e) => setSearchTxt(e.target.value) }
                     type="text"
                     className="form-control"
                     placeholder="Pesquisar nome..."
                 />
-                <button onClick={() => searchHandler()} className="btn btn-primary"><i className="bi bi-search me-1"></i>Buscar</button>
+                <button onClick={ () => searchHandler() } className="btn btn-primary"><i className="bi bi-search me-1"></i>Buscar</button>
             </div>
             <Button
                 variant="success"
-                onClick={() => handleShow()}>
+                onClick={ () => handleShow() }>
                 <i className="bi bi-person-plus-fill me-1"></i>Cadastrar Pessoa
             </Button>
         </div>

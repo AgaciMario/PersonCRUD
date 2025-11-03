@@ -5,7 +5,7 @@
 import Header from '../component/Header/Header'
 import ActionBar from '../component/ActionBars/ActionBar'
 import PersonTable from '../component/Table/PersonTable'
-import Footer from '../component/Footer/Footer'
+import Pagination from '../component/Pagination/Pagination'
 import EditModal from '../component/Modals/EditModal'
 import DeleteModal from '../component/Modals/DeleteModal'
 import { fetchPaginatedPerson } from '../repository/PersonRepository'
@@ -97,7 +97,7 @@ function PersonPage() {
             </div>
 
             <div className="section">
-                <Footer
+                <Pagination
                     totalCount={totalCount}
                     pageSize={pageSize}
                     setpageSize={setpageSize}

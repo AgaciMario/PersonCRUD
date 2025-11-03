@@ -24,7 +24,7 @@ function DeleteModal({ show, handleClose, fetchPersons, personToDelete }) {
                 <Button variant="secondary" onClick={handleClose}>
                     Cancelar
                 </Button>
-                <Button variant="danger" onClick={() => onDelete(personToDelete)}>
+                <Button variant="danger" onClick={ () => onDelete(personToDelete) }>
                     Remover
                 </Button>
             </Modal.Footer>

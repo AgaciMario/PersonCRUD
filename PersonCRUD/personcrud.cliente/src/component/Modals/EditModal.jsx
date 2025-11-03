@@ -10,7 +10,7 @@ function isEmptyObject(obj) {
 
 function EditModal({ show, handleClose, fetchPersons, personData }) {
 
-    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
     const onSubmit = async (data) => {
         if (isEmptyObject(personData)) {

@@ -1,8 +1,6 @@
-﻿// TODO: possivelmente renomear para pagination, já que footer tem o significa roda-pé
+﻿import './Pagination.css'
 
-import './Footer.css'
-
-function Footer({ totalCount, pageSize, setpageSize, currentPage, setcurrentPage }) {
+function Pagination({ totalCount, pageSize, setpageSize, currentPage, setcurrentPage }) {
     const totalPage = Math.ceil(totalCount / pageSize);
     const pagesList = []
 
@@ -30,14 +28,14 @@ function Footer({ totalCount, pageSize, setpageSize, currentPage, setcurrentPage
             </div>
             <div> {`Mostrando ${findex}–${(lindex <= totalCount) ? lindex : totalCount} de ${totalCount} registros`} </div>
             <ul className="pagination pagination-sm mb-0">
-                <li onClick={() => (currentPage > 1) ? setcurrentPage(currentPage - 1) : setcurrentPage(currentPage)}
+                <li onClick={ () => (currentPage > 1) ? setcurrentPage(currentPage - 1) : setcurrentPage(currentPage) }
                     key={"previous"}
                     className="page-item">
                     <a className="page-link" href="#">&laquo;</a>
                 </li>
                 {pagesList}
                 <li
-                    onClick={() => (currentPage < totalPage) ? setcurrentPage(currentPage + 1) : setcurrentPage(currentPage)}
+                    onClick={ () => (currentPage < totalPage) ? setcurrentPage(currentPage + 1) : setcurrentPage(currentPage) }
                     key={"next"} className="page-item">
                     <a className="page-link" href="#">&raquo;</a>
                 </li>
@@ -46,4 +44,4 @@ function Footer({ totalCount, pageSize, setpageSize, currentPage, setcurrentPage
     )
 }
 
-export default Footer
+export default Pagination
