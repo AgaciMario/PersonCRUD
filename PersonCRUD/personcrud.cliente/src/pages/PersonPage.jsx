@@ -22,8 +22,10 @@ function PersonPage() {
 
     // Modal state
     const [show, setshow] = useState(false)
-    const handleClose = () => setshow(false)
+    const handleClose = () => { setpersonToEdit({}); setshow(false) }
     const handleShow = () => setshow(true)
+
+    const [personToEdit, setpersonToEdit] = useState({})
 
     // Notification state
     // toastData exemple:
@@ -58,6 +60,7 @@ function PersonPage() {
                 handleClose={handleClose}
                 handleShow={handleShow}
                 fetchPersons={fetchPersons}
+                personData={personToEdit}
             />
             <div className="section">
                 <Header />
@@ -76,7 +79,7 @@ function PersonPage() {
                 <PersonTable
                     data={data}
                     deleteHandler={(param) => alert(param)}
-                    editHanlder={(param) => alert(param)}
+                    editHanlder={(param) => { setpersonToEdit(param); handleShow()} }
                     viewHanlder={(param) => alert(param)}
                 />
             </div>

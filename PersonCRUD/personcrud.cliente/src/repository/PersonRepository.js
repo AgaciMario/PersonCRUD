@@ -32,6 +32,18 @@ export async function CreatePerson(personData) {
         });
 }
 
+export async function UpdatePerson(id, personData) {
+    return await fetch(`${URL_PERSON}/${id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(personData) })
+        .then(async (response) => {
+            const data = await response.json()
+            if (!response.ok) throw new Error(data.Error)
+            return data
+        }).catch((err) => {
+            // TODO: adicionar logger
+            throw new Error(err.message)
+        });
+}
+
 export async function DeletePerson(id) {
     const response = await fetch(`${URL_PERSON}/${id}`, {
         method: "DELETE",
@@ -44,18 +56,3 @@ export async function DeletePerson(id) {
     return true;
 }
 
-export async function UpdatePerson(id, personData) {
-    const response = await fetch(`${URL_PERSON}/${id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(personData),
-    });
-
-    if (!response.ok) {
-        throw new Error("Erro ao atualizar pessoa");
-    }
-
-    return await response.json();
-}

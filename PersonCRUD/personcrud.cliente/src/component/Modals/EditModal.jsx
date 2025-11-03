@@ -1,19 +1,41 @@
 ﻿import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import { useForm } from 'react-hook-form'
-import { CreatePerson } from '../../repository/PersonRepository'
+import { CreatePerson, UpdatePerson } from '../../repository/PersonRepository'
+import { useEffect } from 'react'
 
-function EditModal({ show, handleClose, fetchPersons }) {
-    const { register, handleSubmit, formState: { errors } } = useForm()
+function isEmptyObject(obj) {
+    return Object.keys(obj).length === 0;
+}
+
+function EditModal({ show, handleClose, fetchPersons, personData }) {
+    console.log(personData)
+
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm()
+
     const onSubmit = async (data) => {
-        await CreatePerson(data)
-            .then((response) => {
-                handleClose()
-                fetchPersons()
-                console.log("person registered: " + response)
-            })
-            .catch((err) => console.log(err))
+        if (isEmptyObject(personData)) {
+            await CreatePerson(data)
+                .then((response) => {
+                    handleClose()
+                    fetchPersons()
+                    console.log("person registered: " + response)
+                })
+                .catch((err) => console.log(err))
+        } else {
+            await UpdatePerson(personData.id, data)
+                .then((response) => {
+                    handleClose()
+                    fetchPersons()
+                    console.log("person updated: " + response)
+                })
+                .catch((err) => console.log(err))
+        }
     }
+
+    // TODO: try to extract the state of the form to the main page.
+    // TODO: Investigar as multiplas rederiação de components
+    useEffect(() => reset(), [show])
 
     return (
         <>
@@ -32,6 +54,7 @@ function EditModal({ show, handleClose, fetchPersons }) {
                                     type="text"
                                     className="form-control"
                                     id="Name"
+                                    defaultValue={personData.name}
                                 />
                                 {errors.Name && <span className="text-danger">O nome é um campo obrigatório</span>}
                             </div>
@@ -43,6 +66,7 @@ function EditModal({ show, handleClose, fetchPersons }) {
                                     className="form-control"
                                     id="Gender"
                                     aria-describedby='genderHelp'
+                                    defaultValue={personData.sex}
                                 />
                                 <div id="genderHelp" className="form-text">Use N/A caso prefira não informar</div>
                             </div>
@@ -56,6 +80,7 @@ function EditModal({ show, handleClose, fetchPersons }) {
                                     type="text"
                                     className="form-control"
                                     id="Email"
+                                    defaultValue={personData.email}
                                 />
                                 {errors.Email && <span className="text-danger">O email deve ter o seguir o padrão: exemple@email.com</span>}
                             </div>
@@ -66,6 +91,7 @@ function EditModal({ show, handleClose, fetchPersons }) {
                                     type="text"
                                     className="form-control"
                                     id="CPF"
+                                    defaultValue={personData.cpf}
                                 />
                                 {errors.CPF && <span className="text-danger">Informe os 11 digitos sem pontuação</span>}
                             </div>
@@ -79,6 +105,7 @@ function EditModal({ show, handleClose, fetchPersons }) {
                                     type="date"
                                     className="form-control"
                                     id="BirthDate"
+                                    defaultValue={personData.birthDate}
                                 />
                                 {errors.BirthDate && <span className="text-danger">Data de nascimento é um campo obrigatório</span>}
                             </div>
@@ -90,6 +117,7 @@ function EditModal({ show, handleClose, fetchPersons }) {
                                     className="form-control"
                                     id="PlaceOfBirth"
                                     aria-describedby="BithPlaceHelp"
+                                    defaultValue={personData.placeOfBirth}
                                 />
                                 <div id="BithPlaceHelp" className="form-text">Informe a cidade de nascimento</div>
                             </div>
@@ -100,6 +128,7 @@ function EditModal({ show, handleClose, fetchPersons }) {
                                     type="text"
                                     className="form-control"
                                     id="Nationality"
+                                    defaultValue={personData.nationality}
                                 />
                                 <div className="form-text">Informe o país de nascimento</div>
                             </div>

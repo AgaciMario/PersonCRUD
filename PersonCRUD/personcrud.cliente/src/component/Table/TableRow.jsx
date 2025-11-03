@@ -12,7 +12,7 @@ function TableRow({ person, editHandler, deleteHandler }) {
                     <i className="bi bi-info-circle"></i>
                 </button>
                 <button className="btn-icon edit"
-                    onClick={() => editHandler("Show Edit modal para: "+ person.id + " " + person.name) }>
+                    onClick={() => editHandler(person) }>
                     <i className="bi bi-pencil-square"></i>
                 </button>
                 <button className="btn-icon delete"
