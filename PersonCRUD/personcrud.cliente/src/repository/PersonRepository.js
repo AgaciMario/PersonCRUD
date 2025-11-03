@@ -45,14 +45,17 @@ export async function UpdatePerson(id, personData) {
 }
 
 export async function DeletePerson(id) {
-    const response = await fetch(`${URL_PERSON}/${id}`, {
-        method: "DELETE",
-    });
-
-    if (!response.ok) {
-        throw new Error("Erro ao excluir pessoa");
-    }
-
-    return true;
+    return await fetch(`${URL_PERSON}/${id}`, { method: "DELETE", })
+        .then(async (response) => {
+            if (response.status != 204) { 
+                const data = await response.json()
+                if (!response.ok) throw new Error(data.Error)
+                return data
+            }      
+        })
+        .catch((err) => {
+            // TODO: adicionar logger
+            throw new Error(err.message)
+        });
 }
 

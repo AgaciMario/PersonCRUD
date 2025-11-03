@@ -9,7 +9,6 @@ function isEmptyObject(obj) {
 }
 
 function EditModal({ show, handleClose, fetchPersons, personData }) {
-    console.log(personData)
 
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm()
 
@@ -34,7 +33,6 @@ function EditModal({ show, handleClose, fetchPersons, personData }) {
     }
 
     // TODO: try to extract the state of the form to the main page.
-    // TODO: Investigar as multiplas rederiação de components
     useEffect(() => reset(), [show])
 
     return (

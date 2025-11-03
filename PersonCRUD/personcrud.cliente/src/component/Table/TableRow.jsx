@@ -16,7 +16,7 @@ function TableRow({ person, editHandler, deleteHandler }) {
                     <i className="bi bi-pencil-square"></i>
                 </button>
                 <button className="btn-icon delete"
-                    onClick={() => deleteHandler("Show Delete modal para: " + person.id + " " + person.name) }>
+                    onClick={() => deleteHandler(person) }>
                     <i className="bi bi-trash-fill"></i>
                 </button>
             </td>

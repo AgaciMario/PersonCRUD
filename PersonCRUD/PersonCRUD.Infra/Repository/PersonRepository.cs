@@ -52,7 +52,7 @@ namespace PersonCRUD.Infra.Repository
             if (!string.IsNullOrEmpty(nameFilter))
                 query = query.Where(person => person.Name.Contains(nameFilter));
 
-            int totalCount = await query.CountAsync(ct);
+            int totalCount = await query.CountAsync(person => person.DeletedAt == null, ct);
 
             List<Person> personData = await query
                 .AsNoTracking()

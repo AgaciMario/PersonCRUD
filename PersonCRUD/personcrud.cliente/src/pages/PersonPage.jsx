@@ -1,12 +1,13 @@
 ﻿// Pagina principal que organiza e importa todos os components
 // também é resposavel pelo gerênciamento de estado como modais abertos paginação, linha selecionada etc
-// TODO: Verificar comportamento estranho onde o component é chamado duas vezes para cada elemento do array.
+// TODO: Investigar as multiplas rederiação de components
 
 import Header from '../component/Header/Header'
 import ActionBar from '../component/ActionBars/ActionBar'
 import PersonTable from '../component/Table/PersonTable'
 import Footer from '../component/Footer/Footer'
 import EditModal from '../component/Modals/EditModal'
+import DeleteModal from '../component/Modals/DeleteModal'
 import { fetchPaginatedPerson } from '../repository/PersonRepository'
 import { useState, useEffect } from 'react'
 import ToastContainer from '../component/Toasts/ToastContainer'
@@ -20,12 +21,17 @@ function PersonPage() {
     const [pageSize, setpageSize] = useState(5)
     const [currentPage, setcurrentPage] = useState(1)
 
-    // Modal state
+    // Edit Modal state
     const [show, setshow] = useState(false)
     const handleClose = () => { setpersonToEdit({}); setshow(false) }
     const handleShow = () => setshow(true)
-
     const [personToEdit, setpersonToEdit] = useState({})
+
+    // Delete Modal state
+    const [showDelete, setshowDelete] = useState(false)
+    const handleDeleteModalClose = () => { setpersonToDelete({}); setshowDelete(false) }
+    const handleDeleteModalShow = () => setshowDelete(true)
+    const [personToDelete, setpersonToDelete] = useState({})
 
     // Notification state
     // toastData exemple:
@@ -62,6 +68,12 @@ function PersonPage() {
                 fetchPersons={fetchPersons}
                 personData={personToEdit}
             />
+            <DeleteModal
+                show={showDelete}
+                handleClose={handleDeleteModalClose}
+                fetchPersons={fetchPersons}
+                personToDelete={personToDelete}
+            />
             <div className="section">
                 <Header />
             </div>
@@ -78,7 +90,7 @@ function PersonPage() {
             <div className="section">
                 <PersonTable
                     data={data}
-                    deleteHandler={(param) => alert(param)}
+                    deleteHandler={(param) => { setpersonToDelete(param); handleDeleteModalShow() }}
                     editHanlder={(param) => { setpersonToEdit(param); handleShow()} }
                     viewHanlder={(param) => alert(param)}
                 />
