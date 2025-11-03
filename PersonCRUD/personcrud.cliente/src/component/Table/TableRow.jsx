@@ -8,7 +8,7 @@ function TableRow({ person, editHandler, deleteHandler }) {
             <td>{person.cpf}</td>
             <td className="text-center">
                 <button className="btn-icon edit"
-                    onClick={() => deleteHandler("Show view modal para: " + person.id + " " + person.name)}>
+                    onClick={() => alert("Show view modal para: " + person.id + " " + person.name)}>
                     <i className="bi bi-info-circle"></i>
                 </button>
                 <button className="btn-icon edit"

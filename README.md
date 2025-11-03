@@ -30,7 +30,7 @@ de:
 - [x] Cadastro: Inserir novos registros de pessoas.
 - [x] Alteração: Atualizar informações de registros existentes.
 - [x] Remoção: Excluir registros de pessoas.
-- [ ] Consulta: Buscar registros de pessoas.
+- [x] Consulta: Buscar registros de pessoas.
 
 ### Desejavel
 - [x] Utilizar formulário reativo react-hook-form
@@ -47,7 +47,7 @@ repositório público no GitHub ou GitLab.
 - [ ] Autenticação: Implementar autenticação via JSON Web Token
 - [ ] (JWT) para acesso à aplicação, permitindo apenas usuários pré-existentes.
 
-- [ ] Testes Automatizados: Implementar testes automatizados com XUnit, garantindo pelo menos 80% de cobertura de código no back- end.
+- [ ] Testes Automatizados: Implementar testes automsatizados com XUnit, garantindo pelo menos 80% de cobertura de código no back- end.
 - [ ] Deploy em Nuvem: A aplicação deve estar rodando em um ambiente
 em nuvem acessível.
 
