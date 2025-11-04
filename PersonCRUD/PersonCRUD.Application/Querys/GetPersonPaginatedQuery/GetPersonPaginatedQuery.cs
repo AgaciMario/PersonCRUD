@@ -5,7 +5,7 @@ namespace PersonCRUD.Application.Querys.GetPersonPaginatedQuery
 {
     public class GetPersonPaginatedQuery : IRequest<GetPersonPaginatedDTO>
     {
-        public GetPersonPaginatedQuery(int currentPage, int pageSize, string? nameFilter)
+        public GetPersonPaginatedQuery(int currentPage, int pageSize, string? nameFilter = null)
         {
             if(currentPage <= 0) 
                 throw new ArgumentException("CurrentPage must be greater than zero.", nameof(CurrentPage));

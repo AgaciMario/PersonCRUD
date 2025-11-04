@@ -6,7 +6,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>PersonCRUD.UnitTests</RootNamespace>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>0.1.0</Version>
+    <Version>0.2.1</Version>
     <!--
     This template uses native xUnit.net command line options when using 'dotnet run' and
     VSTest by default when using 'dotnet test'. For more information on how to enable support
