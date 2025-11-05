@@ -1,6 +1,6 @@
 ﻿using PersonCRUD.Application.Querys.GetPersonByIdQuery;
 
-namespace PersonCRUD.UnitTests
+namespace PersonCRUD.UnitTests.Querys
 {
     public class GetPersonByIdQueryUnitTest
     {
