@@ -24,6 +24,27 @@ namespace PersonCRUD.UnitTests.Commands
         }
 
         [Theory]
+        [InlineData("..........")]
+        [InlineData("Jose1 Da2 Silva3")]
+        [InlineData("123456567877")]
+        [InlineData("João! Almeida Campos")]
+        [InlineData("João_Batista_Mendes")]
+        [InlineData("J")]
+        [InlineData("aaaaaaaaaaaaaaaaaaa")]
+        [InlineData("aabbccddeeffgghhii")]
+        [InlineData("Mariª da Cºsta")]
+        [InlineData("Mari³ da C¹sta")]
+        public void NameInvalidShouldThrowExceptionEdgeCases(string name)
+        {
+            var ex = Assert.Throws<ArgumentException>(() =>
+            {
+                CreatePersonCommand command = new(name, "Male", "test@email.com", DateTime.Now, "Fortaleza-CE", "Brasileiro", "11111111111");
+            });
+
+            Assert.Equal("Name is invalid. (Parameter 'Name')", ex.Message);
+        }
+
+        [Theory]
         [InlineData("john.doe@example.com")]
         [InlineData("maria.santos@empresa.com.br")]
         [InlineData("pedro_souza123@sub.domain.org")]
