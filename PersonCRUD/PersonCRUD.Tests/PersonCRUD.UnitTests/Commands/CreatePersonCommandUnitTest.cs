@@ -32,7 +32,7 @@ namespace PersonCRUD.UnitTests.Commands
         [InlineData("aabbccddeeffgghhii")]
         [InlineData("Mariª da Cºsta")]
         [InlineData("Mari³ da C¹sta")]
-        public void NameInvalidShouldThrowExceptionEdgeCases(string name)
+        public void NameInvalidEdgeCasesShouldThrowException(string name)
         {
             var ex = Assert.Throws<ArgumentException>(() =>
             {
@@ -90,7 +90,7 @@ namespace PersonCRUD.UnitTests.Commands
         [InlineData("user@localhost")]     
         [InlineData("üñîçøðé@example.com")]
         [InlineData("user@[192.168.1.1]")] 
-        public void EmailInvalidFormatShouldThrowExceptionForEdgeCaseEmails(string email)
+        public void EmailInvalidFormatEdgeCasesShouldThrowException(string email)
         {
             var ex = Assert.Throws<ArgumentException>(() =>
             {
@@ -144,7 +144,7 @@ namespace PersonCRUD.UnitTests.Commands
         [InlineData("")]
         [InlineData("   ")]
         [InlineData(null)]
-        public void CPFEmptyStringOrNullThrowException(string cpf)
+        public void CPFEmptyStringOrNullShouldThrowException(string cpf)
         {
             var ex = Assert.Throws<ArgumentException>(() =>
             {
@@ -184,7 +184,7 @@ namespace PersonCRUD.UnitTests.Commands
         [InlineData("77777777777")]
         [InlineData("88888888888")]
         [InlineData("99999999999")]
-        public void CPFInvalidShouldThrowExceptionEdgeCases(string cpf)
+        public void CPFInvalidEdgeCasesShouldThrowException(string cpf)
         {
             var ex = Assert.Throws<ArgumentException>(() =>
             {
