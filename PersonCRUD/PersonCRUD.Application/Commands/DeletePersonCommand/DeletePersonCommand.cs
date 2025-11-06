@@ -6,7 +6,7 @@ namespace PersonCRUD.Application.Commands.DeletePersonCommand
     {
         public DeletePersonCommand(long id)
         {
-            if (id <= 0) throw new ArgumentException("Id must be greater than zero.", nameof(id));
+            if (id <= 0) throw new ArgumentException("Id must be greater than zero.", nameof(Id));
             Id = id;
         }
 
