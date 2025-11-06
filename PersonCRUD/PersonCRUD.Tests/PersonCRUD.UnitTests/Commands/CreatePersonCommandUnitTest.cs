@@ -5,14 +5,12 @@ namespace PersonCRUD.UnitTests.Commands
     // TODOOO: Implementar melhorias de validação de forma que os casos de teste comtemplados sejam aceitos;
     // TODO: Teste o uso de MemberData;
     // TODO: Estudar clean teste;
-    // TODO: Adicionar toda a cobertura de testes incluindo: casos de sucesso, casos de falha e casos de extremos;
     public class CreatePersonCommandUnitTest
     {
         [Theory]
         [InlineData("")]
         [InlineData("    ")]
         [InlineData(null)]
-        // TODO: Adicionar validação para o caso [InlineData(".....")], ideia: aceitar apenas caractere alfabeticos e espaço
         public void NameNullOrWhiteSpaceShouldThrowException(string name)
         {
             var ex = Assert.Throws<ArgumentException>(() =>
@@ -71,7 +69,7 @@ namespace PersonCRUD.UnitTests.Commands
         [InlineData("user@example")]
         [InlineData("user@exam_ple.com")]
         [InlineData("user@example.c")]
-        // TODO: implementar uma validação que seja capaz de tratar o caso: [InlineData(".@..com")]
+        [InlineData(".@..com")]
         [InlineData("user..name@example.com")]
         [InlineData("user.@example.com")]
         [InlineData("user@.example.com")]
@@ -88,10 +86,10 @@ namespace PersonCRUD.UnitTests.Commands
         }
 
         [Theory]
-        [InlineData("user@exa_mple.com")]   // sublinhado no domínio
-        [InlineData("user@localhost")]      // sem TLD
-        [InlineData("üñîçøðé@example.com")] // caracteres Unicode
-        [InlineData("user@[192.168.1.1]")]  // endereço IP no domínio
+        [InlineData("user@exa_mple.com")]  
+        [InlineData("user@localhost")]     
+        [InlineData("üñîçøðé@example.com")]
+        [InlineData("user@[192.168.1.1]")] 
         public void EmailInvalidFormatShouldThrowExceptionForEdgeCaseEmails(string email)
         {
             var ex = Assert.Throws<ArgumentException>(() =>
