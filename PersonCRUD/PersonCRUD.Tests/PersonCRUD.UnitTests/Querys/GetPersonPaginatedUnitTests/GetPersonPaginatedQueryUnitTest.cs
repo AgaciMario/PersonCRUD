@@ -1,6 +1,6 @@
 ﻿using PersonCRUD.Application.Querys.GetPersonPaginatedQuery;
 
-namespace PersonCRUD.UnitTests.Querys
+namespace PersonCRUD.UnitTests.Querys.GetPersonPaginatedUnitTests
 {
     public class GetPersonPaginatedQueryUnitTest
     {
