@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="xunit.v3" Version="3.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
@@ -31,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\PersonCRUD.Application\PersonCRUD.Application.csproj" />
+    <ProjectReference Include="..\..\PersonCRUD.Infra\PersonCRUD.Infra.csproj" />
   </ItemGroup>
 
 </Project>
