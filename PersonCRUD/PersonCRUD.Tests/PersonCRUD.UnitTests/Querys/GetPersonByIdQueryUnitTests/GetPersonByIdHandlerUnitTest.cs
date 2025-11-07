@@ -7,7 +7,7 @@ using PersonCRUD.Infra.Context;
 using PersonCRUD.Infra.Repository;
 using PersonCRUD.Infra.Seed;
 
-namespace PersonCRUD.UnitTests.Querys
+namespace PersonCRUD.UnitTests.Querys.GetPersonByIdQueryUnitTests
 {
     public class GetPersonByIdHandlerUnitTest
     {
