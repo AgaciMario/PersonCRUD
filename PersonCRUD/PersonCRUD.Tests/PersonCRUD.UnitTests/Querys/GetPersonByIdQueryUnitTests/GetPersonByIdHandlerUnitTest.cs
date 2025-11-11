@@ -2,6 +2,7 @@
 using PersonCRUD.Application.Querys.GetPersonByIdQuery;
 using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.Domain.Exceptions;
+using PersonCRUD.UnitTests.Services;
 
 namespace PersonCRUD.UnitTests.Querys.GetPersonByIdQueryUnitTests
 {
@@ -9,11 +10,8 @@ namespace PersonCRUD.UnitTests.Querys.GetPersonByIdQueryUnitTests
     {
         private readonly IPersonRepository personRepository;
 
-        public GetPersonByIdHandlerUnitTest()
-        {
-            ServiceLocator.ServiceLocator locator = ServiceLocator.ServiceLocator.GetInstance();
-            personRepository = locator.GetPersonRepository();
-        }
+        public GetPersonByIdHandlerUnitTest() =>
+            personRepository = ServiceLocator.Instance.GetService<IPersonRepository>();
 
         [Fact]
         public async Task IdNonExistingInDatabaseThrowNotFoundException()
