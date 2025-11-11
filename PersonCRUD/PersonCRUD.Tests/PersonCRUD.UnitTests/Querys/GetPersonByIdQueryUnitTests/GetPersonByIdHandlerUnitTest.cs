@@ -1,34 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PersonCRUD.Application.DTOs;
+﻿using PersonCRUD.Application.DTOs;
 using PersonCRUD.Application.Querys.GetPersonByIdQuery;
 using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.Domain.Exceptions;
-using PersonCRUD.Infra.Context;
-using PersonCRUD.Infra.Repository;
-using PersonCRUD.Infra.Seed;
 
 namespace PersonCRUD.UnitTests.Querys.GetPersonByIdQueryUnitTests
 {
     public class GetPersonByIdHandlerUnitTest
     {
-        // TODO: realizar teste unitários utilizando o banco de dados inmemory não é recomendado pela documentação do EF
-        // uma alternativa um pouco melhor é utilizar o sqlLite inmemory mode, que ainda sim não é ideal mais e melhor que
-        // usar o in memory do EF puro, sem o provider. O recomendado e usar o respository pattern e fazer as consultas sobre o IEnumerable.
-        private static DbContextOptions<PersonDbContext> dbOptions =
-            new DbContextOptionsBuilder<PersonDbContext>()
-            .UseInMemoryDatabase(databaseName: "testeDatabase").Options;
-
-        PersonDbContext context;
-        IPersonRepository personRepository;
+        private readonly IPersonRepository personRepository;
 
         public GetPersonByIdHandlerUnitTest()
         {
-            // TODO: buscar uma forma de adicionar isso com injeção de dependência.
-            context = new PersonDbContext(dbOptions);
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-            DbSeed.Initialize(context);
-            personRepository = new PersonRepository(context);
+            ServiceLocator.ServiceLocator locator = ServiceLocator.ServiceLocator.GetInstance();
+            personRepository = locator.GetPersonRepository();
         }
 
         [Fact]
