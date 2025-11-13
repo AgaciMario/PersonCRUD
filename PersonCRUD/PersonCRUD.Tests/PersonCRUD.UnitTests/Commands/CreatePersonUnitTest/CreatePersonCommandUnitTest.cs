@@ -1,6 +1,6 @@
 ﻿using PersonCRUD.Application.Commands.CreatePersonCommand;
 
-namespace PersonCRUD.UnitTests.Commands
+namespace PersonCRUD.UnitTests.Commands.CreatePersonUnitTest
 {
     // TODOOO: Implementar melhorias de validação de forma que os casos de teste comtemplados sejam aceitos;
     // TODO: Teste o uso de MemberData;
