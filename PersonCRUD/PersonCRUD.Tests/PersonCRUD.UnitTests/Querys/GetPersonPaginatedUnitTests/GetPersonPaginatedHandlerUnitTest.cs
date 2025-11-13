@@ -1,16 +1,21 @@
-﻿using PersonCRUD.Application.DTOs;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PersonCRUD.Application.DTOs;
 using PersonCRUD.Application.Querys.GetPersonPaginatedQuery;
 using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.UnitTests.Services;
 
 namespace PersonCRUD.UnitTests.Querys.GetPersonPaginatedUnitTests
 {
-    public class GetPersonPaginatedHandlerUnitTest
+    public sealed class GetPersonPaginatedHandlerUnitTest : IDisposable
     {
         private readonly IPersonRepository personRepository;
+        private readonly IServiceScope scope;
 
-        public GetPersonPaginatedHandlerUnitTest() =>
-            personRepository = ServiceLocator.Instance.GetService<IPersonRepository>();
+        public GetPersonPaginatedHandlerUnitTest()
+        {
+            scope = ServiceLocator.Instance.CreateScope();
+            personRepository = scope.ServiceProvider.GetRequiredService<IPersonRepository>();
+        }
 
         [Fact]
         public async Task PageSizeItsNeverLessThenDataCount()
@@ -36,5 +41,7 @@ namespace PersonCRUD.UnitTests.Querys.GetPersonPaginatedUnitTests
 
             Assert.DoesNotContain(result.Data, (item) => { return !item.Name.Contains(nameFilter); });
         }
+
+        public void Dispose() => scope.Dispose();
     }
 }

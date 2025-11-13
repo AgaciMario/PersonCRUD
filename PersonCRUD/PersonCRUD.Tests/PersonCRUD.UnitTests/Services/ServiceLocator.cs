@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PersonCRUD.Domain.Abstractions;
+using PersonCRUD.Domain.Services;
 using PersonCRUD.Infra.Context;
 using PersonCRUD.Infra.Repository;
 using PersonCRUD.Infra.Seed;
@@ -24,6 +25,7 @@ namespace PersonCRUD.UnitTests.Services
             }, ServiceLifetime.Scoped);
 
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IPersonService, PersonService>();
 
             serviceProvider = services.BuildServiceProvider();
 
@@ -37,13 +39,6 @@ namespace PersonCRUD.UnitTests.Services
 
         public static ServiceLocator Instance => instance.Value;
 
-        public T GetService<T>() where T : notnull
-        {
-            // TODO: implementar forma melhor de controle do scopo, pois esta implementação mantém
-            // referencias a partes de memória que deveriam ser descartadas pelo GC, logo uma seria
-            // de problema de segurança, persistencia, e performance iram aparecer com o tempo.
-            var scope = serviceProvider.CreateScope();
-            return scope.ServiceProvider.GetRequiredService<T>();
-        }
+        public IServiceScope CreateScope() => serviceProvider.CreateScope();
     }
 }

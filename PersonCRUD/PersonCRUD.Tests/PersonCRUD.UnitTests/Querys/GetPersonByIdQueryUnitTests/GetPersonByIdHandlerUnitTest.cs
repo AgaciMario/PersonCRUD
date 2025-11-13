@@ -1,4 +1,5 @@
-﻿using PersonCRUD.Application.DTOs;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PersonCRUD.Application.DTOs;
 using PersonCRUD.Application.Querys.GetPersonByIdQuery;
 using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.Domain.Exceptions;
@@ -6,12 +7,16 @@ using PersonCRUD.UnitTests.Services;
 
 namespace PersonCRUD.UnitTests.Querys.GetPersonByIdQueryUnitTests
 {
-    public class GetPersonByIdHandlerUnitTest
+    public sealed class GetPersonByIdHandlerUnitTest : IDisposable
     {
         private readonly IPersonRepository personRepository;
+        private readonly IServiceScope scope;
 
-        public GetPersonByIdHandlerUnitTest() =>
-            personRepository = ServiceLocator.Instance.GetService<IPersonRepository>();
+        public GetPersonByIdHandlerUnitTest() 
+        {
+            scope = ServiceLocator.Instance.CreateScope();
+            personRepository = scope.ServiceProvider.GetRequiredService<IPersonRepository>();
+        }
 
         [Fact]
         public async Task IdNonExistingInDatabaseThrowNotFoundException()
@@ -34,5 +39,7 @@ namespace PersonCRUD.UnitTests.Querys.GetPersonByIdQueryUnitTests
 
             Assert.Equal(id, person.Id);
         }
+            
+        public void Dispose() => scope.Dispose();
     }
 }
