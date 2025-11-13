@@ -1,6 +1,6 @@
 ﻿using PersonCRUD.Application.Commands.DeletePersonCommand;
 
-namespace PersonCRUD.UnitTests.Commands
+namespace PersonCRUD.UnitTests.Commands.DeletePersonUnitTest
 {
     public class DeletePersonCommandUnitTest
     {
