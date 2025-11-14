@@ -47,7 +47,7 @@ repositório público no GitHub ou GitLab.
 - [ ] Autenticação: Implementar autenticação via JSON Web Token
 - [ ] (JWT) para acesso à aplicação, permitindo apenas usuários pré-existentes.
 
-- [ ] Testes Automatizados: Implementar testes automatizados com XUnit, garantindo pelo menos 80% de cobertura de código no back- end.
+- [x] Testes Automatizados: Implementar testes automatizados com XUnit, garantindo pelo menos 80% de cobertura de código no back- end.
 - [ ] Deploy em Nuvem: A aplicação deve estar rodando em um ambiente
 em nuvem acessível.
 
