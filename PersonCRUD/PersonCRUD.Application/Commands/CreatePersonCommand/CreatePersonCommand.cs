@@ -6,7 +6,6 @@ namespace PersonCRUD.Application.Commands.CreatePersonCommand
 {
     public class CreatePersonCommand : IRequest<PersonDTO>
     {
-        // TODO: Tentar adicionar o parametro de birthDate como nullable para impedir resposta de requisição despadronizada.
         public CreatePersonCommand(string name, string? sex, string? email, DateTime birthDate, string? placeOfBirth, string? nationality, string cpf)
         {
             SetName(name);
