@@ -1,4 +1,4 @@
 ﻿namespace PersonCRUD.Server.Records
 {
-    public record UserCredentials(string Name, string Password);
+    public record UserCredentials(string Email, string Password);
 }

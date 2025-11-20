@@ -35,6 +35,12 @@ public static class DbSeed
             new Person("Fernanda Souza", "Female", "fernanda.souza@example.com", new DateTime(2001, 11, 2), "Teresina-PI", "Brasileira", "21222324242")
         });
 
+        db.User.AddRange(new List<User>
+        {
+            new User(1, "admin", "admin@email.com", "admin", "admin"),
+            new User(2, "default", "default@email.com", "default")
+        });
+
         db.SaveChanges();
     }
 }

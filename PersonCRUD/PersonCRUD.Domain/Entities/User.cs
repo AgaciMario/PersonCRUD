@@ -4,7 +4,7 @@
     {
         protected User() { }
 
-        public User(long? id, string name, string email, string password, string role = "Default_user")
+        public User(long? id, string name, string email, string password, string role = "default_user")
         {
             Id = id;
             Name = name;
