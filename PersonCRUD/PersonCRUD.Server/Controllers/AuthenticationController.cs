@@ -10,9 +10,6 @@ namespace PersonCRUD.Server.Controllers
     public class AuthenticationController : ControllerBase
     {
         [HttpPost(Name = "Authenticate")]
-        //[ProducesResponseType(typeof(PersonDTO), StatusCodes.Status201Created)]
-        //[ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         public ActionResult Authenticate([FromBody] UserCredentials userCredentials, CancellationToken ct = default)
         {
 
