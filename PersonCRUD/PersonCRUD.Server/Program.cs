@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
 using PersonCRUD.Domain.Abstractions;
@@ -8,6 +9,7 @@ using PersonCRUD.Infra.Repository;
 using PersonCRUD.Infra.Seed;
 using PersonCRUD.Server.Middleware;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,10 +58,24 @@ builder.Services.AddCors(options =>
         });
 });
 
+ConfigurationManager appSettings = builder.Configuration;
+
+builder.Services.AddAuthentication().AddJwtBearer(options => {
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidIssuer = appSettings["Jwt:Issuer"],
+        ValidAudience = appSettings["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings["Jwt:Key"])),
+        ValidateIssuerSigningKey = true,
+        ValidateLifetime = false,
+        ValidateIssuer = true,
+        ValidateAudience = true
+    };
+});
+
 // Resolvendo dependências da aplicação
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
-
 
 builder.Services.AddDbContext<PersonDbContext>(options => options.UseInMemoryDatabase("Person"));
 
@@ -82,6 +98,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
