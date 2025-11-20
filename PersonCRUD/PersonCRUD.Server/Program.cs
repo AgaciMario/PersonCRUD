@@ -49,10 +49,10 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost5173",
+    options.AddPolicy("AllowLocalhost7089",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173")
+            policy.WithOrigins("http://localhost:7089")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -67,7 +67,7 @@ builder.Services.AddAuthentication().AddJwtBearer(options => {
         ValidAudience = appSettings["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings["Jwt:Key"])),
         ValidateIssuerSigningKey = true,
-        ValidateLifetime = false,
+        ValidateLifetime = true,
         ValidateIssuer = true,
         ValidateAudience = true
     };
@@ -76,13 +76,14 @@ builder.Services.AddAuthentication().AddJwtBearer(options => {
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy("registered_user", policy =>
         policy
-            .RequireRole("default_user"))
+            .RequireRole("default_user", "admin"))
     .AddPolicy("super_user", policy =>
         policy
             .RequireRole("admin"));
-
+    
 // Resolvendo dependências da aplicação
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 
 builder.Services.AddDbContext<PersonDbContext>(options => options.UseInMemoryDatabase("Person"));

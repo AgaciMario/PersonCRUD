@@ -19,6 +19,7 @@ namespace PersonCRUD.Server.Controllers
     [Consumes("application/json")]
     public class PersonController(IMediator mediator) : ControllerBase
     {
+        // TODO: Remover propriedade abaixo, pois podemos usar o mediator através do parametro do contrutor primário diretamente.
         private IMediator Mediator { get; set; } = mediator;
 
         /// <summary>
