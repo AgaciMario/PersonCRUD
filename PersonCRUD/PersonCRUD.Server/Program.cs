@@ -73,6 +73,14 @@ builder.Services.AddAuthentication().AddJwtBearer(options => {
     };
 });
 
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("registered_user", policy =>
+        policy
+            .RequireRole("default_user"))
+    .AddPolicy("super_user", policy =>
+        policy
+            .RequireRole("admin"));
+
 // Resolvendo dependências da aplicação
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
