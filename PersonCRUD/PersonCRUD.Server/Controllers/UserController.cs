@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using PersonCRUD.Application.Commands.GenerateAccessTokenCommand;
 using PersonCRUD.Application.DTOs;
 using PersonCRUD.Server.Records;
-using System.Text;
 
 namespace PersonCRUD.Server.Controllers
 {
@@ -13,7 +12,6 @@ namespace PersonCRUD.Server.Controllers
     [Consumes("application/json")]
     public class UserController(IMediator mediator, IConfiguration configuration) : ControllerBase
     {
-
         /// <summary>
         /// Provide a Json Web Token for user authentication and authorization.
         /// </summary>
@@ -38,21 +36,10 @@ namespace PersonCRUD.Server.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Authenticate([FromBody] UserCredentials userCredentials, CancellationToken ct = default)
         {
-            GenerateAccessTokenCommand command = new (
-                userCredentials.Email,
-                userCredentials.Password,
-                new JwtInfo(
-                    JwtIssuer: configuration["Jwt:Issuer"],
-                    JwtAudience: configuration["Jwt:Audience"],
-                    JwtKey: Encoding.ASCII.GetBytes(configuration["Jwt:Key"])
-                )
-            );
-
+            GenerateAccessTokenCommand command = new(userCredentials.Email, userCredentials.Password);
             TokenDTO response = await mediator.Send(command, ct);
 
-            if (response.Success)
-                return Ok(response);
-
+            if (response.Success) return Ok(response);
             return Unauthorized(response);
         }
     }

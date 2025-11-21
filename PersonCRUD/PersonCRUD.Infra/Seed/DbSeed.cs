@@ -1,4 +1,5 @@
 ﻿using PersonCRUD.Domain.Entities;
+using PersonCRUD.Domain.Enum;
 using PersonCRUD.Infra.Context;
 
 namespace PersonCRUD.Infra.Seed;
@@ -37,7 +38,7 @@ public static class DbSeed
 
         db.User.AddRange(new List<User>
         {
-            new User(1, "admin", "admin@email.com", "admin", "admin"),
+            new User(1, "admin", "admin@email.com", "admin", UserRoles.Administrator),
             new User(2, "default", "default@email.com", "default")
         });
 

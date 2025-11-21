@@ -3,7 +3,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
 using PersonCRUD.Domain.Abstractions;
+using PersonCRUD.Domain.Enum;
 using PersonCRUD.Domain.Services;
+using PersonCRUD.Infra.Auth;
 using PersonCRUD.Infra.Context;
 using PersonCRUD.Infra.Repository;
 using PersonCRUD.Infra.Seed;
@@ -76,15 +78,16 @@ builder.Services.AddAuthentication().AddJwtBearer(options => {
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy("registered_user", policy =>
         policy
-            .RequireRole("default_user", "admin"))
+            .RequireRole(UserRoles.Default.ToString(), UserRoles.Administrator.ToString()))
     .AddPolicy("super_user", policy =>
         policy
-            .RequireRole("admin"));
-    
+            .RequireRole(UserRoles.Administrator.ToString()));
+
 // Resolvendo dependências da aplicação
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddDbContext<PersonDbContext>(options => options.UseInMemoryDatabase("Person"));
 
