@@ -38,8 +38,8 @@ public static class DbSeed
 
         db.User.AddRange(new List<User>
         {
-            new User(1, "admin", "admin@email.com", "admin", UserRoles.Administrator),
-            new User(2, "default", "default@email.com", "default")
+            new User(1, "admin", "admin@email.com", "Tk9k3PcFLoWWzTAh02iBkYEdT8UW5AhASd3VlOvqylPv95lPlzFhaml5IteThDjIWa0=", "YWY92Cqb9I5kGC3VHb8vfsoTtlIAAAAA", UserRoles.Administrator),
+            new User(2, "default", "default@email.com", "smjmgSNty4YBRkVZ8NwAYfQQHn/oHEcMbj/BuuRwMfyRlKKzdlTXkfgPySX56xZ8ruU=", "8i+qcQjsch775Vb+VvDlWcLT8lkAAAAA")
         });
 
         db.SaveChanges();

@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using PersonCRUD.Domain.Enum;
 using PersonCRUD.Domain.Abstractions;
+using PersonCRUD.Domain.Enum;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace PersonCRUD.Infra.Auth
@@ -12,7 +13,12 @@ namespace PersonCRUD.Infra.Auth
     {
         public string ComputeHash(string password, string salt)
         {
-            throw new NotImplementedException();
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+            byte[] saltBytes = Encoding.UTF8.GetBytes(salt);
+
+            byte[] hashBytes = Rfc2898DeriveBytes.Pbkdf2(passwordBytes, saltBytes, 5000, HashAlgorithmName.SHA256, 50);
+
+            return Convert.ToBase64String(hashBytes);
         }
 
         public string GenerateToken(string email, UserRoles role)

@@ -15,8 +15,10 @@ namespace PersonCRUD.Application.Commands.LoginCommand
                 if (user == null)
                     return new TokenDTO(false, string.Empty, "A user with the given email was not found!");
 
-                if (command.Password != user.Password)
-                    return new TokenDTO(false, string.Empty, "Incorrect password!");
+                string commandPassword = authService.ComputeHash(command.Password, user.Salt);
+
+                if (!user.Password.Equals(commandPassword))
+                    return new TokenDTO(false, string.Empty, "Incorrect password! hash: ");
                 
                 string token = authService.GenerateToken(user.Email, user.Role);
 
