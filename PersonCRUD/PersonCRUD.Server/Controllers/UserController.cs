@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PersonCRUD.Application.Commands.LoginCommand;
-using PersonCRUD.Application.DTOs;
 using PersonCRUD.Server.Records;
 
 namespace PersonCRUD.Server.Controllers
@@ -31,16 +30,14 @@ namespace PersonCRUD.Server.Controllers
         /// <response code="401">User credentials are incorrect or user is not registered in the database</response>
         /// <response code="500">If some server side error occur</response>
         [HttpPost("Login", Name = "Login")]
-        [ProducesResponseType(typeof(TokenDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(TokenDTO), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(TokenResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Login([FromBody] UserCredentials userCredentials, CancellationToken ct = default)
         {
             LoginCommand command = new(userCredentials.Email, userCredentials.Password);
-            TokenDTO response = await mediator.Send(command, ct);
-
-            if (response.Success) return Ok(response);
-            return Unauthorized(response);
+            string response = await mediator.Send(command, ct);
+            return Ok(new TokenResponse(response));
         }
     }
 }

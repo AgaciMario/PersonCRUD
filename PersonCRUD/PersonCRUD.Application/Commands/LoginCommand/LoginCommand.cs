@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using PersonCRUD.Application.DTOs;
 
 namespace PersonCRUD.Application.Commands.LoginCommand
 {
-    public class LoginCommand : IRequest<TokenDTO>
+    public class LoginCommand : IRequest<string>
     {
         public LoginCommand(string email, string password)
         {
