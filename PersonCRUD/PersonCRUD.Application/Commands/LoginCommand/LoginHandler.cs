@@ -3,11 +3,11 @@ using PersonCRUD.Application.DTOs;
 using PersonCRUD.Domain.Abstractions;
 using PersonCRUD.Domain.Entities;
 
-namespace PersonCRUD.Application.Commands.GenerateAccessTokenCommand
+namespace PersonCRUD.Application.Commands.LoginCommand
 {
-    public class GenerateAccessTokenHandler(IUserRepository userRepository, IAuthService authService) : IRequestHandler<GenerateAccessTokenCommand, TokenDTO>
+    public class LoginHandler(IUserRepository userRepository, IAuthService authService) : IRequestHandler<LoginCommand, TokenDTO>
     {
-        public async Task<TokenDTO> Handle(GenerateAccessTokenCommand command, CancellationToken cancellationToken)
+        public async Task<TokenDTO> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
             try
             {

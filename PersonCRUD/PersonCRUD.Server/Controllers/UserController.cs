@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PersonCRUD.Application.Commands.GenerateAccessTokenCommand;
+using PersonCRUD.Application.Commands.LoginCommand;
 using PersonCRUD.Application.DTOs;
 using PersonCRUD.Server.Records;
 
@@ -10,7 +10,7 @@ namespace PersonCRUD.Server.Controllers
     [Route("[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class UserController(IMediator mediator, IConfiguration configuration) : ControllerBase
+    public class UserController(IMediator mediator) : ControllerBase
     {
         /// <summary>
         /// Provide a Json Web Token for user authentication and authorization.
@@ -30,13 +30,13 @@ namespace PersonCRUD.Server.Controllers
         /// <response code="200">Returns the created Json Web Token(JWT) in compact format</response>
         /// <response code="401">User credentials are incorrect or user is not registered in the database</response>
         /// <response code="500">If some server side error occur</response>
-        [HttpPost("Authenticate", Name = "Authenticate")]
+        [HttpPost("Login", Name = "Login")]
         [ProducesResponseType(typeof(TokenDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(TokenDTO), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Authenticate([FromBody] UserCredentials userCredentials, CancellationToken ct = default)
+        public async Task<ActionResult> Login([FromBody] UserCredentials userCredentials, CancellationToken ct = default)
         {
-            GenerateAccessTokenCommand command = new(userCredentials.Email, userCredentials.Password);
+            LoginCommand command = new(userCredentials.Email, userCredentials.Password);
             TokenDTO response = await mediator.Send(command, ct);
 
             if (response.Success) return Ok(response);

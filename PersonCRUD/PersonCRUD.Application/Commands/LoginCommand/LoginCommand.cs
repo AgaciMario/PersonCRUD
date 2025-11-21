@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using PersonCRUD.Application.DTOs;
 
-namespace PersonCRUD.Application.Commands.GenerateAccessTokenCommand
+namespace PersonCRUD.Application.Commands.LoginCommand
 {
-    public class GenerateAccessTokenCommand : IRequest<TokenDTO>
+    public class LoginCommand : IRequest<TokenDTO>
     {
-        public GenerateAccessTokenCommand(string email, string password)
+        public LoginCommand(string email, string password)
         {
             // Use static exception classes to throw exception;
             if(string.IsNullOrEmpty(email))
