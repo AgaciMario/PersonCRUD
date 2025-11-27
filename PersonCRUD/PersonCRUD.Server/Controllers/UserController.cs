@@ -5,6 +5,7 @@ using PersonCRUD.Server.Records;
 
 namespace PersonCRUD.Server.Controllers
 {
+    //TODO: avaliar controller pois ela aparentemente não esta seguindo os principios REST;
     [ApiController]
     [Route("[controller]")]
     [Produces("application/json")]

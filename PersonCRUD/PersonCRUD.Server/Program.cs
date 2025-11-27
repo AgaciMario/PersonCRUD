@@ -51,10 +51,10 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost7089",
+    options.AddPolicy("AllowLocalhost5173",
         policy =>
         {
-            policy.WithOrigins("http://localhost:7089")
+            policy.WithOrigins("http://localhost:5173")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
