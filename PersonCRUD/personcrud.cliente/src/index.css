@@ -1,4 +1,8 @@
-﻿body {
+﻿html, body, div[id="root"], .container {
+    height: 100vh;
+}
+
+body {
     background-color: #f5f6f8;
     font-family: "Segoe UI", Roboto, sans-serif;
     color: #212529;
@@ -29,4 +33,10 @@
 
 .btn-icon:hover {
     opacity: 0.7;
+}
+
+.grid-center {
+    height: 100vh;
+    display: grid;
+    place-items: center;
 }
