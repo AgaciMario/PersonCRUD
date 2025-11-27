@@ -7,12 +7,15 @@ function LoginPage() {
         <div className="grid-center">
             <div className="col-4">
                 <div className="section">
-                    <Header />
-                </div>
-                <div className="section">
+                    <div className="mt-3 mb-4">
+                        <Header />
+                    </div>
+
+                    <hr></hr>
+
                     <Form>
                         <Form.Group className="mb-3" controlId="Email">
-                            <Form.Label>Endereço de Email:</Form.Label>
+                            <Form.Label>Email:</Form.Label>
                             <Form.Control type="email" placeholder="Digite seu email" />
                             <Form.Text className="text-muted">
                                 Nos não iremos compartilhado seu email com ninguém.
