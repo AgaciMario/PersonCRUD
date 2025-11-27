@@ -10,6 +10,7 @@ namespace PersonCRUD.Application.Commands.CreatePersonCommand
         private readonly IPersonService personService;
         private readonly IPersonRepository personRepository;
 
+        // TODO: Adicionar contrutor primario e remover as propriedades
         public CreatePersonHandler(IPersonService personService, IPersonRepository personRepository)
         {
             this.personService = personService;

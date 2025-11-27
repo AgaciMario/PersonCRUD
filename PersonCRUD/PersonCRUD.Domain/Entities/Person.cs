@@ -13,7 +13,7 @@
             BirthDate = birthDate;
             PlaceOfBirth = placeOfBirth;
             Nationality = nationality;
-            SetCPF(cpf);
+            CPF = cpf;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
@@ -30,13 +30,6 @@
         public DateTime UpdatedAt { get; private set; }
         public DateTime? DeletedAt { get; private set; }
 
-        private void SetCPF(string cpf)
-        {
-            // TODO: Não mais necessário pois a versão atual da api não aceita CPFs com formatação
-            cpf = cpf.Replace(".", "").Replace("-", "");
-            CPF = cpf;
-        }
-
         public void Update(string name, string sex, string email, DateTime birthDate, string placeOfBirth, string nationality, string cpf)
         {
             Name = name;
@@ -45,7 +38,7 @@
             BirthDate = birthDate;
             PlaceOfBirth = placeOfBirth;
             Nationality = nationality;
-            SetCPF(cpf);
+            CPF = cpf;
             UpdatedAt = DateTime.UtcNow;
         }
 

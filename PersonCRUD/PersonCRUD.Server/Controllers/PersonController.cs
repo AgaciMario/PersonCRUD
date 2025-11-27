@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
@@ -18,6 +19,7 @@ namespace PersonCRUD.Server.Controllers
     [Consumes("application/json")]
     public class PersonController(IMediator mediator) : ControllerBase
     {
+        // TODO: Remover propriedade abaixo, pois podemos usar o mediator através do parametro do contrutor primário diretamente.
         private IMediator Mediator { get; set; } = mediator;
 
         /// <summary>
@@ -35,8 +37,10 @@ namespace PersonCRUD.Server.Controllers
         /// </remarks>
         /// <response code="200">Returns the pagination details and a data object with the list of queried persons</response>
         /// <response code="400">If some query parameter is invalid</response>
+        /// <response code="401">If the user is not authenticated or does not have permission to use the endpoint</response>
         /// <response code="500">If some server side error occur</response>
         [HttpGet(Name = "GetAllPerson")]
+        [Authorize(Policy = "registered_user")]
         [ProducesResponseType(typeof(GetPersonPaginatedDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
@@ -60,8 +64,10 @@ namespace PersonCRUD.Server.Controllers
         /// </remarks>
         /// <response code="200">Returns the person infromation</response>
         /// <response code="404">If there is no person with the id informed in the database</response>
+        /// <response code="401">If the user is not authenticated or does not have permission to use the endpoint</response>
         /// <response code="500">If some server side error occur</response>
         [HttpGet("{id}", Name = "GetPerson")]
+        [Authorize(Policy = "registered_user")]
         [ProducesResponseType(typeof(PersonDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
@@ -94,8 +100,10 @@ namespace PersonCRUD.Server.Controllers
         /// </remarks>
         /// <response code="201">Returns the newly created item</response>
         /// <response code="400">If some information on the request is invalid</response>
+        /// <response code="401">If the user is not authenticated or does not have permission to use the endpoint</response>
         /// <response code="500">If some server side error occur</response>
         [HttpPost(Name = "CreatePerson")]
+        [Authorize(Policy = "registered_user")]
         [ProducesResponseType(typeof(PersonDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
@@ -129,8 +137,10 @@ namespace PersonCRUD.Server.Controllers
         /// <response code="200">Returns the newly created item</response>
         /// <response code="400">If some information on the request is invalid</response>
         /// <response code="404">If there is no person with the given id in the database</response>
+        /// <response code="401">If the user is not authenticated or does not have permission to use the endpoint</response>
         /// <response code="500">If some server side error occur</response>
         [HttpPut("{id}", Name = "UpdatePerson")]
+        [Authorize(Policy = "registered_user")]
         [ProducesResponseType(typeof(PersonDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -165,8 +175,10 @@ namespace PersonCRUD.Server.Controllers
         /// </remarks>
         /// <response code="204">Returns empty body, the person was deleted successfully</response>
         /// <response code="404">If there is no person with the id informed in the database</response>
+        /// <response code="401">If the user is not authenticated or does not have permission to use the endpoint</response>
         /// <response code="500">If some server side error occur</response>
         [HttpDelete("{id}", Name = "DeletePerson")]
+        [Authorize(Policy = "registered_user")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]

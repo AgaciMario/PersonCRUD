@@ -1,4 +1,5 @@
 ﻿using PersonCRUD.Domain.Entities;
+using PersonCRUD.Domain.Enum;
 using PersonCRUD.Infra.Context;
 
 namespace PersonCRUD.Infra.Seed;
@@ -33,6 +34,12 @@ public static class DbSeed
             new Person("Carolina Pinto", "Female", "carolina.pinto@example.com", new DateTime(1997, 8, 8), "Campo Grande-MS", "Brasileira", "18192021212"),
             new Person("André Gomes", "Male", "andre.gomes@example.com", new DateTime(1994, 4, 12), "São Luís-MA", "Brasileiro", "20212223232"),
             new Person("Fernanda Souza", "Female", "fernanda.souza@example.com", new DateTime(2001, 11, 2), "Teresina-PI", "Brasileira", "21222324242")
+        });
+
+        db.User.AddRange(new List<User>
+        {
+            new User(1, "admin", "admin@email.com", "Tk9k3PcFLoWWzTAh02iBkYEdT8UW5AhASd3VlOvqylPv95lPlzFhaml5IteThDjIWa0=", "YWY92Cqb9I5kGC3VHb8vfsoTtlIAAAAA", UserRoles.Administrator),
+            new User(2, "default", "default@email.com", "smjmgSNty4YBRkVZ8NwAYfQQHn/oHEcMbj/BuuRwMfyRlKKzdlTXkfgPySX56xZ8ruU=", "8i+qcQjsch775Vb+VvDlWcLT8lkAAAAA")
         });
 
         db.SaveChanges();

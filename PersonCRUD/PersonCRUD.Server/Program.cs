@@ -1,13 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PersonCRUD.Application.Commands.CreatePersonCommand;
 using PersonCRUD.Domain.Abstractions;
+using PersonCRUD.Domain.Enum;
 using PersonCRUD.Domain.Services;
+using PersonCRUD.Infra.Auth;
 using PersonCRUD.Infra.Context;
 using PersonCRUD.Infra.Repository;
 using PersonCRUD.Infra.Seed;
 using PersonCRUD.Server.Middleware;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,19 +51,43 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost5173",
+    options.AddPolicy("AllowLocalhost7089",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173")
+            policy.WithOrigins("http://localhost:7089")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
 });
 
+ConfigurationManager appSettings = builder.Configuration;
+
+builder.Services.AddAuthentication().AddJwtBearer(options => {
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidIssuer = appSettings["Jwt:Issuer"],
+        ValidAudience = appSettings["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings["Jwt:Key"])),
+        ValidateIssuerSigningKey = true,
+        ValidateLifetime = true,
+        ValidateIssuer = true,
+        ValidateAudience = true
+    };
+});
+
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("registered_user", policy =>
+        policy
+            .RequireRole(UserRoles.Default.ToString(), UserRoles.Administrator.ToString()))
+    .AddPolicy("super_user", policy =>
+        policy
+            .RequireRole(UserRoles.Administrator.ToString()));
+
 // Resolvendo dependências da aplicação
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
-
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddDbContext<PersonDbContext>(options => options.UseInMemoryDatabase("Person"));
 
@@ -82,6 +110,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();

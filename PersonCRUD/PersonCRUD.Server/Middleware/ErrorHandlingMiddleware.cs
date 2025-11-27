@@ -25,6 +25,10 @@ namespace PersonCRUD.Server.Middleware
             {
                 await HandleExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message);
             }
+            catch (UnauthorizedException ex)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.Unauthorized, ex.Message);
+            }
             catch
             {
                 // TODO: Salvar o erro e a requisição enviada e um log para identificar o problema posteriormente.
