@@ -1,8 +1,8 @@
-﻿import PersonPage from './pages/PersonPage.jsx'
+﻿import LoginPage from './pages/LoginPage.jsx'
 
 function App() {
     return (
-        <PersonPage></PersonPage>
+        <LoginPage></LoginPage>
     )
 }
 
